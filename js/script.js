@@ -1,9 +1,22 @@
+// initial value
+
 const inputName = document.querySelector('#input__name')
 const screenStart = document.querySelector('#screen__start')
 
+let levelIndex = 0;
+let level = CONSTANT.LEVEL[levelIndex]
+
+// --------------
+
+document.querySelector('#btn__level').addEventListener('click', (e) => {
+  levelIndex = levelIndex + 1 > CONSTANT.LEVEL.length - 1 ? 0 : levelIndex + 1;
+  level = CONSTANT.LEVEL[levelIndex];
+  e.target.innerHTML = CONSTANT.LEVEL_NAME[levelIndex];
+});
+
 document.querySelector('#btn__play').addEventListener('click', () => {
   if (inputName.value.trim().length > 0) {
-    alert('start game')
+    alert(`level => ${level}`);
   } else {
     inputName.classList.add('input--err');
     setTimeout(() => {
