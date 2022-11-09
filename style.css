@@ -99,13 +99,6 @@ nav {
   font-size: var(--font-size-l);
   color: var(--blue);
 }
-.main {
-  font-size: var(--font-size-m) ;
-  height: 100vh;
-  padding-top: var(--nav-size);
-  display: grid;
-  place-items: center;
-}
 .screen {
   position: relative;
   overflow: hidden;
@@ -125,7 +118,7 @@ nav {
   align-items: center;
   justify-content: center;
 }
-.screen__start--active {
+.screen__start.active {
   transform: translateX(0)
 }
 .screen__start > * + * {
@@ -147,4 +140,38 @@ nav {
 .btn--blue {
   background-color: var(--blue);
   color: var(--white);
+}
+.main {
+  font-size: var(--font-size-m) ;
+  height: 100vh;
+  padding-top: var(--nav-size);
+  display: grid;
+  place-items: center;
+}
+.main__game-screen {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 0;
+  transform: translateX(100%);
+  transition: transform .3s ease-in-out
+}
+.main__game-screen.active {
+  transform: translateX(0);
+}
+.main__sudoku-grid {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(9, auto);
+}
+.main__grid-cell {
+  height: var(--cell-size);
+  width: var(--cell-size);
+  background-color: var(--bg-main);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+  font-size: var(--font-size-m);
+  cursor: pointer;
 }
