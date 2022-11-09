@@ -14,7 +14,7 @@
   --nav-size: 70px;
   --cell-size: 50px;
   --border-radius: 10px;
-  --gap: 5px;
+  --gap: 3px;
   --font-size-m: 1.5rem;
   --font-size-l: 2rem;
   --font-size-xl: 3rem;
@@ -118,7 +118,7 @@ nav {
   align-items: center;
   justify-content: center;
 }
-.screen__start.active {
+.screen__start--active {
   transform: translateX(0)
 }
 .screen__start > * + * {
@@ -157,21 +157,40 @@ nav {
   transform: translateX(100%);
   transition: transform .3s ease-in-out
 }
-.main__game-screen.active {
+.main__game-screen--active {
   transform: translateX(0);
 }
 .main__sudoku-grid {
   display: grid;
-  gap: var(--gap);
+  /* gap: var(--gap); */
   grid-template-columns: repeat(9, auto);
 }
 .main__grid-cell {
   height: var(--cell-size);
   width: var(--cell-size);
-  background-color: var(--bg-main);
+  background-color: var(--white);
+  border: 1px solid var(--bg-main);
   color: var(--blue);
   display: grid;
   place-items: center;
   font-size: var(--font-size-m);
   cursor: pointer;
+}
+.main__grid-cell:hover {
+  border: 2px solid var(--blue);
+}
+/* .main__grid-cell.hover {
+  border: 3px solid var(--blue);
+} */
+.main__grid-cell--filled {
+  background-color: var(--filled-bg);
+  color: var(--filled-color);
+}
+.main__grid-cell--selected {
+  background-color: var(--blue);
+  color: var(--white);
+}
+.main__grid-cell--error {
+  background-color: var(--red);
+  color: var(--white);
 }
