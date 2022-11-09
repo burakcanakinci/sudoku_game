@@ -1,6 +1,6 @@
 :root {
   --bg-body: #fff;
-  --bg-main: #000;
+  --bg-main: #DCE3ED;
   --text-color: #000;
   --filled-color: #000;
   --filled-bg: #CFCFCF;
@@ -26,15 +26,16 @@
   -webkit-tap-highlight-color: transparent;
 }
 body {
-  font-family: 'Noto Sans Limbu', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
   height: 100vh;
   background-color: var(--bg-body);
   overflow-x: hidden;
   user-select: none;
 }
 input {
-  font-family: 'Noto Sans Limbu', sans-serif;
-  border: 2px solid var(--black);
+  font-family: 'Roboto', sans-serif;
+  border: 3px solid var(--bg-main);
   color: var(--text-color);
 }
 input:hover,
@@ -46,7 +47,7 @@ input:focus {
   width: 280px;
   border-radius: var(--border-radius);
   outline: 0;
-  background-color: var(--filled-bg);
+  /* background-color: var(--bg-main); */
   padding: 20px;
   font-size: var(--font-size-l);
   text-align: center;
@@ -111,4 +112,20 @@ nav {
 }
 .screen__start > * + * {
   margin-top: 20px;
+}
+.btn {
+  height: 80px;
+  width: 280px;
+  background-color: var(--bg-main);
+  color: var(--text-color);
+  border-radius: var(--border-radius);
+  display: grid;
+  place-items: center;
+  transition: width .3s ease-in-out;
+  overflow: hidden;
+  font-size: var(--font-size-l);
+}
+.btn--blue {
+  background-color: var(--blue);
+  color: var(--white);
 }
