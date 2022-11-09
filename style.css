@@ -1,0 +1,64 @@
+:root {
+  --bg-body: #fff;
+  --text-color: #000;
+  --filled-color: #000;
+  --filled-bg: #CFCFCF;
+  --selected-bg: #bbdefb;
+  --white: #fff;
+  --black: #000;
+  --red: red;
+  --green: green;
+  --blue: #0072e3;
+
+  --cell-size: 50px;
+  --border-radius: 10px;
+  --gap: 5px;
+  --font-size-m: 1.5rem;
+  --font-size-l: 2rem;
+  --font-size-xl: 3rem;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  font-family: 'Noto Sans Limbu', sans-serif;
+  height: 100vh;
+  background-color: var(--bg-body);
+  overflow-x: hidden;
+  user-select: none;
+}
+input {
+  font-family: 'Noto Sans Limbu', sans-serif;
+  border: 2px solid var(--black);
+  color: var(--text-color);
+}
+input:hover,
+input:focus {
+  border-color: var(--black);
+}
+a {
+  text-decoration: none;
+  color: unset;
+}
+ul {
+  list-style-type: none;
+}
+nav {
+  background-color: var(--bg-body);
+  color: var(--text-color);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 5px 2px var(--bg-body);
+  z-index: 99;
+}
+.nav__container {
+  max-width: 1280px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
