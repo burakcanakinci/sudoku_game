@@ -33,8 +33,8 @@ const initGameGrid = () => {
   for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
     let row = Math.floor(i/CONSTANT.GRID_SIZE);
     let col = i % CONSTANT.GRID_SIZE;
-    if (row === 2 || row === 5) cells[index].style.marginBottom = '4px';
-    if (col === 2 || col === 5) cells[index].style.marginRight = '4px';
+    if (row === 2 || row === 5) cells[index].style.borderBottom = 'solid 1px black';
+    if (col === 2 || col === 5) cells[index].style.borderRight = 'solid 1px black';
     index++;
   }
 }
