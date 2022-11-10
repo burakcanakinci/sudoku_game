@@ -1,11 +1,9 @@
 // initial value
-
 const inputName = document.querySelector('#input__name')
 const screenStart = document.querySelector('#screen__start')
 
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex]
-
 // --------------
 
 document.querySelector('#btn__level').addEventListener('click', (e) => {
@@ -27,6 +25,17 @@ document.querySelector('#btn__play').addEventListener('click', () => {
 });
 
 const getGameInfo = () => JSON.parse(localStorage.getItem('game'));
+
+//add space for each 9 cells
+const initGameGrid = () => {
+  let index = 0;
+  for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
+    let row = Math.floor(i/CONSTANT.GRID_SIZE);
+    let col = i % CONSTANT.GRID_SIZE;
+    if (row === 2 || row === 5) cells
+  }
+}
+// --------------------------
 
 const init = () => {
   const game = getGameInfo();
