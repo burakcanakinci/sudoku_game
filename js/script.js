@@ -11,6 +11,8 @@ const gameTime = document.querySelector('#game-time');
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex];
 let timer = null;
+let pause = false;
+let seconds = 0;
 // --------------
 
 
@@ -30,6 +32,7 @@ const initGameGrid = () => {
 // ---------------
 const setPlayerName = (name) => localStorage.setItem('playerName', name);
 const getPlayerName = () => localStorage.getItem('playerName');
+const showTime = (seconds) => new Date(seconds * 1000).toISOString().substr(11, 8);
 
 const startGame = () => {
   screenStart.classList.remove('active');
@@ -38,8 +41,14 @@ const startGame = () => {
   playerName.innerHTML = inputName.value;
   setPlayerName(inputName.value.trim());
 
+  gameLevel.innerHTML = CONSTANT.LEVEL_NAME[levelIndex];
+  seconds = 0;
+
   timer = setInterval(() => {
-    
+    if (!pause) {
+      seconds = seconds + 1;
+      gameTime.innerHTML = showTime(seconds);
+    }
   }, 1000);
 }
 
