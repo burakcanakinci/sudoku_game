@@ -44,7 +44,18 @@ const initSudoku = () => {
   // generate sudoku puzzle here
   su = sudokuGen(level);
   suAnswer = [...su.question];
-  console.table(suAnswer)
+  console.table(suAnswer);
+  //show sudoku to div
+  for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
+    let row = Math.floor(i / CONSTANT.GRID_SIZE);
+    let col = i % CONSTANT.GRID_SIZE;
+
+    cells[i].setAttribute('data-value', su.question[row][col]);
+    if (su.question[row][col] !== 0) {
+      cells[i].classList.add('filled');
+      cells[i].innerHTML = su.question[row][col]
+    }
+  }
 }
 
 const startGame = () => {
@@ -57,8 +68,6 @@ const startGame = () => {
   gameLevel.innerHTML = CONSTANT.LEVEL_NAME[levelIndex];
   seconds = 0;
   showTime(seconds);
-
-  initSudoku();
 
   timer = setInterval(() => {
     if (!pause) {
@@ -89,6 +98,7 @@ document.querySelector('#btn__level').addEventListener('click', (e) => {
 
 document.querySelector('#btn__play').addEventListener('click', () => {
   if (nameInput.value.trim().length > 0) {
+    initSudoku();
     startGame();
   } else {
     nameInput.classList.add('input--err');
