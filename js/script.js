@@ -9,6 +9,10 @@ const cells = document.querySelectorAll('.main__grid-cell');
 const playerName = document.querySelector('#player-name') ;
 const gameLevel = document.querySelector('#game-level');
 const gameTime = document.querySelector('#game-time');
+const pauseButton = document.querySelector('#btn__pause');
+const resumeButton = document.querySelector('#btn__resume');
+const newGameButton = document.querySelector('#btn__new-game');
+
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex];
 let timer = null;
@@ -81,18 +85,18 @@ document.querySelector('#btn__play').addEventListener('click', () => {
   }
 });
 
-document.querySelector('#btn__pause').addEventListener('click', () => {
+pauseButton.addEventListener('click', () => {
   pauseScreen.classList.add('active');
-  document.querySelector('#btn__pause').classList.add('active');
+  pauseButton.classList.add('active');
   pause = true;
 });
-
-document.querySelector('#btn__resume').addEventListener('click', () => {
+resumeButton.addEventListener('click', () => {
   pauseScreen.classList.remove('active');
-  document.querySelector('#btn__pause').classList.remove('active');
+  pauseButton.classList.remove('active');
   pause = false;
 });
-document.querySelector('#btn__new-game').addEventListener('click', () => {
+newGameButton.addEventListener('click', () => {
+  pauseScreen.classList.add('active');
   returnStartScreen();
 });
 // ----------------
