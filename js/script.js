@@ -2,7 +2,6 @@
 const startScreen = document.querySelector('#start-screen');
 const gameScreen = document.querySelector('#game-screen');
 const pauseScreen = document.querySelector('#pause-screen');
-// --------------
 // initial value
 const nameInput = document.querySelector('#input__name');
 const cells = document.querySelectorAll('.main__grid-cell');
@@ -64,6 +63,7 @@ const returnStartScreen = () => {
   startScreen.classList.add('active');
   gameScreen.classList.remove('active');
   pauseScreen.classList.remove('active');
+  pauseButton.classList.remove('active');
 }
 
 // add button event
@@ -96,7 +96,6 @@ resumeButton.addEventListener('click', () => {
   pause = false;
 });
 newGameButton.addEventListener('click', () => {
-  pauseScreen.classList.add('active');
   returnStartScreen();
 });
 // ----------------
