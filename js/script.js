@@ -38,6 +38,10 @@ const setPlayerName = (name) => localStorage.setItem('playerName', name);
 const getPlayerName = () => localStorage.getItem('playerName');
 const showTime = (seconds) => new Date(seconds * 1000).toISOString().substr(11, 8);
 
+const initSudoku = () => {
+  // generate sudoku puzzle here
+}
+
 const startGame = () => {
   startScreen.classList.remove('active');
   gameScreen.classList.add('active');
@@ -65,6 +69,8 @@ const returnStartScreen = () => {
   pauseScreen.classList.remove('active');
   pauseButton.classList.remove('active');
 }
+
+
 
 // add button event
 document.querySelector('#btn__level').addEventListener('click', (e) => {
