@@ -53,6 +53,15 @@ const startGame = () => {
   }, 1000);
 }
 
+const returnStartScreen = () => {
+  clearInterval(timer);
+  pause = false;
+  seconds = 0;
+  startScreen.classList.add('active');
+  gameScreen.classList.remove('active');
+  pauseScreen.classList.remove('active');
+}
+
 // add button event
 document.querySelector('#btn__level').addEventListener('click', (e) => {
   levelIndex = levelIndex + 1 > CONSTANT.LEVEL.length - 1 ? 0 : levelIndex + 1;
@@ -74,15 +83,17 @@ document.querySelector('#btn__play').addEventListener('click', () => {
 
 document.querySelector('#btn__pause').addEventListener('click', () => {
   pauseScreen.classList.add('active');
-  document.querySelector('#btn__pause').classList.add('active')
+  document.querySelector('#btn__pause').classList.add('active');
   pause = true;
 });
 
 document.querySelector('#btn__resume').addEventListener('click', () => {
   pauseScreen.classList.remove('active');
-  document.querySelector('#btn__pause').classList.remove('active')
-
+  document.querySelector('#btn__pause').classList.remove('active');
   pause = false;
+});
+document.querySelector('#btn__new-game').addEventListener('click', () => {
+  returnStartScreen();
 });
 // ----------------
 
