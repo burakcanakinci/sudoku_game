@@ -1,9 +1,10 @@
 // screens
-const screenStart = document.querySelector('#screen__start');
+const startScreen = document.querySelector('#start-screen');
 const gameScreen = document.querySelector('#game-screen');
+const pauseScreen = document.querySelector('#pause-screen');
 // --------------
 // initial value
-const inputName = document.querySelector('#input__name');
+const nameInput = document.querySelector('#input__name');
 const cells = document.querySelectorAll('.main__grid-cell');
 const playerName = document.querySelector('#player-name') ;
 const gameLevel = document.querySelector('#game-level');
@@ -35,11 +36,11 @@ const getPlayerName = () => localStorage.getItem('playerName');
 const showTime = (seconds) => new Date(seconds * 1000).toISOString().substr(11, 8);
 
 const startGame = () => {
-  screenStart.classList.remove('active');
+  startScreen.classList.remove('active');
   gameScreen.classList.add('active');
 
-  playerName.innerHTML = inputName.value;
-  setPlayerName(inputName.value.trim());
+  playerName.innerHTML = nameInput.value;
+  setPlayerName(nameInput.value.trim());
 
   gameLevel.innerHTML = CONSTANT.LEVEL_NAME[levelIndex];
   seconds = 0;
@@ -60,15 +61,25 @@ document.querySelector('#btn__level').addEventListener('click', (e) => {
 });
 
 document.querySelector('#btn__play').addEventListener('click', () => {
-  if (inputName.value.trim().length > 0) {
+  if (nameInput.value.trim().length > 0) {
     startGame();
   } else {
-    inputName.classList.add('input--err');
+    nameInput.classList.add('input--err');
     setTimeout(() => {
-      inputName.classList.remove('input--err');
-      inputName.focus();
+      nameInput.classList.remove('input--err');
+      nameInput.focus();
     }, 250);
   }
+});
+
+document.querySelector('#btn__pause').addEventListener('click', () => {
+  pauseScreen.classList.add('active');
+  pause = true;
+});
+
+document.querySelector('#btn__resume').addEventListener('click', () => {
+  pauseScreen.classList.remove('active');
+  pause = false;
 });
 // ----------------
 
@@ -76,6 +87,12 @@ const init = () => {
   const game = getGameInfo();
   document.querySelector('#btn__continue').style.display = game ? 'grid':'none';
   initGameGrid();
+
+  if (getPlayerName()) {
+    nameInput.value = getPlayerName();
+  } else {
+    nameInput.focus();
+  }
 }
 
 init();
