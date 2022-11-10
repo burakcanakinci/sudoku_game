@@ -103,18 +103,48 @@ const sudokuCheck = (grid) => {
     col: -1
   }
   if (!findUnassignedPos(grid, unassignedPos)) return true;
+
   grid.forEach((row, i) => {
     row.forEach((num, j) => {
       if (isSafe(grid, i, j, num)) {
         if (isFullGrid(grid)) {
           return true;
         } else {
-          if (sudokuCreate(grid)) {
-            return true;
-          }
+            if (sudokuCreate(grid)) {
+              return true;
+            }
         }
       }
     })
   })
   return isFullGrid(grid);
+}
+const random = () => Math.floor(Math.random() * CONSTANT.GRID_SIZE);
+const removeCells = (grid, level) => {
+  let res = [...grid];
+  let attempts = level;
+  while (attempts > 0) {
+    let row = random();
+    let col = random();
+    while (res[row][col] === 0) {
+      row = random();
+      col = random();
+    }
+    res[row][col] = CONSTANT.UNASSIGNED;
+    attempts--;
+  }
+  return res;
+}
+// generate sudoku base on level
+const sudokuGen = (level) => {
+  let sudoku = newGrid(CONSTANT.GRID_SIZE);
+  let check = sudokuCreate(sudoku)
+  if (check) {
+    let question = removeCells(sudoku, level);
+    return {
+      original: sudoku,
+      question: question
+    }
+  }
+  return undefined;
 }
