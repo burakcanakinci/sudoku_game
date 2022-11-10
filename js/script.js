@@ -1,29 +1,18 @@
+// screens
+const screenStart = document.querySelector('#screen__start');
+const gameScreen = document.querySelector('#game-screen');
+// --------------
 // initial value
-const inputName = document.querySelector('#input__name')
-const screenStart = document.querySelector('#screen__start')
-
+const inputName = document.querySelector('#input__name');
+const cells = document.querySelectorAll('.main__grid-cell');
+const playerName = document.querySelector('#player-name') ;
+const gameLevel = document.querySelector('#game-level');
+const gameTime = document.querySelector('#game-time');
 let levelIndex = 0;
-let level = CONSTANT.LEVEL[levelIndex]
-const cells = document.querySelectorAll('.main__grid-cell')
+let level = CONSTANT.LEVEL[levelIndex];
+let timer = null;
 // --------------
 
-document.querySelector('#btn__level').addEventListener('click', (e) => {
-  levelIndex = levelIndex + 1 > CONSTANT.LEVEL.length - 1 ? 0 : levelIndex + 1;
-  level = CONSTANT.LEVEL[levelIndex];
-  e.target.innerHTML = CONSTANT.LEVEL_NAME[levelIndex];
-});
-
-document.querySelector('#btn__play').addEventListener('click', () => {
-  if (inputName.value.trim().length > 0) {
-    alert(`level => ${level}`);
-  } else {
-    inputName.classList.add('input--err');
-    setTimeout(() => {
-      inputName.classList.remove('input--err');
-      inputName.focus();
-    }, 250);
-  }
-});
 
 const getGameInfo = () => JSON.parse(localStorage.getItem('game'));
 
@@ -38,7 +27,41 @@ const initGameGrid = () => {
     index++;
   }
 }
-// --------------------------
+// ---------------
+const setPlayerName = (name) => localStorage.setItem('playerName', name);
+const getPlayerName = () => localStorage.getItem('playerName');
+
+const startGame = () => {
+  screenStart.classList.remove('active');
+  gameScreen.classList.add('active');
+
+  playerName.innerHTML = inputName.value;
+  setPlayerName(inputName.value.trim());
+
+  timer = setInterval(() => {
+    
+  }, 1000);
+}
+
+// add button event
+document.querySelector('#btn__level').addEventListener('click', (e) => {
+  levelIndex = levelIndex + 1 > CONSTANT.LEVEL.length - 1 ? 0 : levelIndex + 1;
+  level = CONSTANT.LEVEL[levelIndex];
+  e.target.innerHTML = CONSTANT.LEVEL_NAME[levelIndex];
+});
+
+document.querySelector('#btn__play').addEventListener('click', () => {
+  if (inputName.value.trim().length > 0) {
+    startGame();
+  } else {
+    inputName.classList.add('input--err');
+    setTimeout(() => {
+      inputName.classList.remove('input--err');
+      inputName.focus();
+    }, 250);
+  }
+});
+// ----------------
 
 const init = () => {
   const game = getGameInfo();

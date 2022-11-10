@@ -118,8 +118,8 @@ nav {
   align-items: center;
   justify-content: center;
 }
-.screen__start--active {
-  transform: translateX(0)
+.screen__start.active {
+  transform: translateX(0);
 }
 .screen__start > * + * {
   margin-top: 20px;
@@ -149,16 +149,17 @@ nav {
   place-items: center;
 }
 .main__game-screen {
-  display: block ruby;
+  display: none;
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
   padding: 30px 0;
-  transform: translateX(100%);
-  transition: transform .3s ease-in-out
+  /* transform: translateX(150%); */
+  transition: transform .3s ease-in-out;
 }
-.main__game-screen--active {
-  transform: translateX(0);
+.main__game-screen.active {
+  display: block ruby;
+  /* transform: translateX(0); */
 }
 .main__sudoku-grid {
   display: grid;
@@ -250,5 +251,5 @@ nav {
 }
 .number__delete {
   background-color: var(--red);
-  color: var(--white)
+  color: var(--white);
 }
