@@ -149,7 +149,7 @@ nav {
   place-items: center;
 }
 .main__game-screen {
-  display: flex;
+  display: block ruby;
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
@@ -196,10 +196,12 @@ nav {
 }
 .main__game-info {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  grid-template-columns: 1fr;
+  /* margin-top: 20px; */
+  /* margin-bottom: 10px; */
+  margin-left: 50px;
   gap: 10px;
+  width: 300px;
 }
 .main__game-info__box {
   display: grid;
@@ -216,4 +218,37 @@ nav {
   justify-content: center;
   padding-left: 2rem;
   margin-bottom: auto;
+}
+.btn__pause {
+  position: absolute;
+  right: 10px;
+  height: 30px;
+  width: 30px;
+  border-radius: var(--border-radius);
+  background-color: var(--blue);
+  color: var(--white);
+  font-size: var(--font-size-m);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.numbers {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+.number {
+  height: var(--cell-size);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-main);
+  color: var(--blue);
+  display: grid;
+  place-items: center;
+  font-size: var(--font-size-m);
+  cursor: pointer;
+}
+.number__delete {
+  background-color: var(--red);
+  color: var(--white)
 }
