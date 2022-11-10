@@ -195,10 +195,10 @@ nav {
   color: var(--white);
 }
 .main__game-info {
-  margin-top: 20px;
-  margin-bottom: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-top: 20px;
+  margin-bottom: 10px;
   gap: 10px;
 }
 .main__game-info__box {
@@ -209,4 +209,11 @@ nav {
   place-items: center;  
   padding: 0 20px;
   font-size: var(--font-size-m);
+}
+.main__game-info__time {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2rem;
+  margin-bottom: auto;
 }
