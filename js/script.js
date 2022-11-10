@@ -4,6 +4,7 @@ const screenStart = document.querySelector('#screen__start')
 
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex]
+const cells = document.querySelectorAll('.main__grid-cell')
 // --------------
 
 document.querySelector('#btn__level').addEventListener('click', (e) => {
@@ -32,7 +33,9 @@ const initGameGrid = () => {
   for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
     let row = Math.floor(i/CONSTANT.GRID_SIZE);
     let col = i % CONSTANT.GRID_SIZE;
-    if (row === 2 || row === 5) cells
+    if (row === 2 || row === 5) cells[index].style.marginBottom = '4px';
+    if (col === 2 || col === 5) cells[index].style.marginRight = '4px';
+    index++;
   }
 }
 // --------------------------
@@ -40,6 +43,7 @@ const initGameGrid = () => {
 const init = () => {
   const game = getGameInfo();
   document.querySelector('#btn__continue').style.display = game ? 'grid':'none';
+  initGameGrid();
 }
 
 init();

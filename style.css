@@ -14,7 +14,7 @@
   --nav-size: 70px;
   --cell-size: 50px;
   --border-radius: 10px;
-  --gap: 3px;
+  --gap: 2px;
   --font-size-m: 1.5rem;
   --font-size-l: 2rem;
   --font-size-xl: 3rem;
@@ -83,7 +83,7 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  box-shadow: 5px 2px var(--bg-body);
+  /* box-shadow: 5px 2px var(--bg-body); */
   z-index: 99;
 }
 .nav__container {
@@ -194,4 +194,4 @@ nav {
   background-color: var(--red);
   color: var(--white);
 }
-/* 41.17 */
+/* 43.30 */  
