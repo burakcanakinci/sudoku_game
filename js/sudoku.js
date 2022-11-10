@@ -34,6 +34,87 @@ const isBoxSafe = (grid, boxRow, boxCol, value) => {
 }
 // check in row, col and 3x3 box
 const isSafe = (grid, row, col, value) => {
-  return isColSafe(grid, col, value) && isRowSafe(grid, row, value)
-  && isBoxSafe(grid, row - row%3, col - col%3,)
+  return isColSafe(grid, col, value)
+  && isRowSafe(grid, row, value)
+  && isBoxSafe(grid, row - row%3, col - col%3, value)
+  && value !== CONSTANT.UNASSIGNED;
+}
+// find unassigned cell
+const findUnassignedPos = (grid, pos) => {
+  for (let row = 0; row < CONSTANT.GRID_SIZE; row++) {
+    for (let col = 0; col < CONSTANT.GRID_SIZE; col++) {
+      if (grid[row][col] === CONSTANT.UNASSIGNED) {
+        pos.row = row;
+        pos.col = col;
+        return true;
+      }
+    }
+  }
+  return false;
+}
+// shuffle arr
+const shuffleArray = (arr) => {
+  let currentIndex = arr.length;
+  while (currentIndex !== 0) {
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    let temp = arr[currentIndex];
+    arr[currentIndex] = arr[randomIndex];
+    arr[randomIndex] = temp;
+  }
+  return arr;
+}
+// check puzzle is complete
+const isFullGrid = (grid) => {
+  return grid.every((row, i) => {
+    return row.every((value, j) => {
+      return value !== CONSTANT.UNASSIGNED;
+    });
+  });
+}
+
+const sudokuCreate = (grid) => {
+  let unassignedPos = {
+    row: -1,
+    col: -1
+  }
+  if (!findUnassignedPos(grid, unassignedPos)) return true;
+  let numberList = shuffleArray([...CONSTANT.NUMBERS])
+  let row = unassignedPos.row;
+  let col = unassignedPos.col;
+  numberList.forEach((num, i) => {
+    if (isSafe(grid, row, col, num)) {
+      grid[row][col] = num;
+      if (isFullGrid(grid)) {
+        return true;
+      } else {
+        if (sudokuCreate(grid)) {
+          return true;
+        }
+      }
+      grid[row][col] = CONSTANT.UNASSIGNED;
+    }
+  });
+  return isFullGrid(grid);
+}
+const sudokuCheck = (grid) => {
+  let unassignedPos = {
+    row: -1,
+    col: -1
+  }
+  if (!findUnassignedPos(grid, unassignedPos)) return true;
+  grid.forEach((row, i) => {
+    row.forEach((num, j) => {
+      if (isSafe(grid, i, j, num)) {
+        if (isFullGrid(grid)) {
+          return true;
+        } else {
+          if (sudokuCreate(grid)) {
+            return true;
+          }
+        }
+      }
+    })
+  })
+  return isFullGrid(grid);
 }
