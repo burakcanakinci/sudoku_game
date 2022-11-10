@@ -74,11 +74,14 @@ document.querySelector('#btn__play').addEventListener('click', () => {
 
 document.querySelector('#btn__pause').addEventListener('click', () => {
   pauseScreen.classList.add('active');
+  document.querySelector('#btn__pause').classList.add('active')
   pause = true;
 });
 
 document.querySelector('#btn__resume').addEventListener('click', () => {
   pauseScreen.classList.remove('active');
+  document.querySelector('#btn__pause').classList.remove('active')
+
   pause = false;
 });
 // ----------------

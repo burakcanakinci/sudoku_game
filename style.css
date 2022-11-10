@@ -233,6 +233,9 @@ nav {
   place-items: center;
   cursor: pointer;
 }
+.btn__pause.active {
+  display: none;
+}
 .numbers {
   margin-top: 20px;
   display: grid;
