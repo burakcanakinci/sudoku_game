@@ -51,6 +51,7 @@ const clearSudoku = () => {
 const initSudoku = () => {
   // clear old sudoku
   clearSudoku();
+  resetBg();
   // generate sudoku puzzle here
   su = sudokuGen(level);
   suAnswer = [...su.question];
@@ -121,6 +122,23 @@ const hoverBg = (index) => {
     step += 1;
   }
 }
+const resetBg = () => {
+  cells.forEach(e => e.classList.remove('hover'));
+}
+const initCellsEvent = () => {
+  cells.forEach((e, index) => {
+    e.addEventListener('click', () => {
+      if (!e.classList.contains('filled')) {
+        cells.forEach(e => e.classList.remove('selected'));
+        selectedCell = index;
+        e.classList.remove('err');
+        e.classList.add('selected');
+        resetBg();
+        hoverBg();
+      }
+    })
+  })
+}
 
 
 // add button event
@@ -162,7 +180,7 @@ const init = () => {
   const game = getGameInfo();
   document.querySelector('#btn__continue').style.display = game ? 'grid':'none';
   initGameGrid();
-
+  initCellsEvent();
   if (getPlayerName()) {
     nameInput.value = getPlayerName();
   } else {
