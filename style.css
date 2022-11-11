@@ -5,6 +5,7 @@
   --filled-color: #000;
   --filled-bg: #E2EBF3;
   --selected-bg: #bbdefb;
+  --number-hover: #C8D3E3;
   --white: #fff;
   --black: #000;
   --red: #c30000;
@@ -188,7 +189,7 @@ nav {
   color: var(--filled-color);
 }
 .main__grid-cell.selected {
-  background-color: var(--blue);
+  background-color: var(--selected-bg);
   color: var(--white);
 }
 .main__grid-cell.error {
@@ -251,10 +252,18 @@ nav {
   place-items: center;
   font-size: var(--font-size-m);
   cursor: pointer;
+  transition: .2s;
+}
+.number:hover {
+  background-color: var(--number-hover);
 }
 .number__delete {
   background-color: var(--red);
   color: var(--white);
+  transition: .2s;
+}
+.number__delete:hover {
+  background-color: #980000;
 }
 .main__pause-screen {
   display: none;
