@@ -3,9 +3,9 @@
   --bg-main: #DCE3ED;
   --text-color: #000;
   --filled-color: #000;
-  --filled-bg: #E2EBF3;
+  --filled-bg: #E7EBEE;
   --selected-bg: #bbdefb;
-  --number-hover: #C8D3E3;
+  --number-hover: #E4E9F1;
   --white: #fff;
   --black: #000;
   --red: #c30000;
@@ -178,15 +178,16 @@ nav {
   place-items: center;
   font-size: var(--font-size-m);
 }
-/* .main__grid-cell:hover {
-  border: 1px solid var(--blue);
-}
-.main__grid-cell.hover {
-  border: 3px solid var(--blue);
-} */
 .main__grid-cell.filled {
   background-color: var(--filled-bg);
   color: var(--filled-color);
+}
+/* .main__grid-cell:hover {
+  border: 1px solid var(--blue);
+} */
+.main__grid-cell.hover {
+  /* border: 1px solid var(--selected-bg); */
+  background-color: var(--number-hover);
 }
 .main__grid-cell.selected {
   background-color: var(--selected-bg);

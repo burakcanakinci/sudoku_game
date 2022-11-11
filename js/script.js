@@ -102,8 +102,8 @@ const hoverBg = (index) => {
   let boxStartCol = col - col % 3;
   for (let i = 0; i < CONSTANT.BOX_SIZE; i++) {
     for (let j = 0; j < CONSTANT.BOX_SIZE; j++) {
-      let cell = cells[9 * (boxStartRow + i) + (boxStartCol + j)]
-      cells.classList.add('hover');
+      let cell = cells[9 * (boxStartRow + i) + (boxStartCol + j)];
+      cell.classList.add('hover');
     }  
   }
   let step = 9;
@@ -134,7 +134,7 @@ const initCellsEvent = () => {
         e.classList.remove('err');
         e.classList.add('selected');
         resetBg();
-        hoverBg();
+        hoverBg(index);
       }
     })
   })
