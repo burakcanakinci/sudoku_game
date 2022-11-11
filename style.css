@@ -248,11 +248,11 @@ nav {
   gap: 5px;
 }
 .number {
+  display: grid;
   height: var(--cell-size);
   border-radius: var(--border-radius);
   background-color: var(--bg-main);
   color: var(--blue);
-  display: grid;
   place-items: center;
   font-size: var(--font-size-m);
   cursor: pointer;
@@ -262,6 +262,12 @@ nav {
   background-color: var(--number-hover);
 }
 .number__delete {
+  display: grid;
+  place-items: center;
+  font-size: var(--font-size-m);
+  cursor: pointer;
+  height: var(--cell-size);
+  border-radius: var(--border-radius);
   background-color: var(--red);
   color: var(--white);
   transition: .2s;
@@ -297,7 +303,4 @@ nav {
   100% {
     transform: scale(1);
   }
-}
-.cell-error {
-  animation: zoom-out-shake 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }

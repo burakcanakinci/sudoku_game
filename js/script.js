@@ -12,6 +12,7 @@ const gameTime = document.querySelector('#game-time');
 const pauseButton = document.querySelector('#btn__pause');
 const resumeButton = document.querySelector('#btn__resume');
 const newGameButton = document.querySelector('#btn__new-game');
+const deleteButton = document.querySelector('#btn__delete');
 
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex];
@@ -138,10 +139,10 @@ const checkError = (value) => {
   const addError = (cell) => {
     if (parseInt(cell.getAttribute('data-value')) === value) {
       cell.classList.add('error');
-      cell.classList.add('cell-error');
-      setTimeout(() => {
-        cell.classList.remove('cell-error');
-      }, 500);
+      // cell.classList.add('cell-error');
+      // setTimeout(() => {
+      //   cell.classList.remove('cell-error');
+      // }, 500);
     }
   }
   let index = selectedCell;
@@ -177,6 +178,32 @@ const checkError = (value) => {
   }
 }
 const removeError = () => cells.forEach(e => e.classList.remove('error'));
+
+const saveGameInfo = () => {
+  let game = {
+    level: levelIndex,
+    seconds: seconds,
+    su: {
+      original: su.original,
+      question: su.question,
+      answer: suAnswer
+    }
+  }
+  localStorage.setItem('game', JSON.stringify(game));
+}
+
+const removeGameInfo = () => {
+  localStorage.removeItem('game');
+  document.querySelector('#btn__continue').style.display = 'none';
+}
+
+const isGameWin = () => sudokuCheck(suAnswer);
+const showResult = () => {
+  clearInterval(timer);
+  alert('win');
+  // show result screen
+  
+}
 const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
@@ -188,6 +215,7 @@ const initNumberInputEvent = () => {
         let col = selectedCell % CONSTANT.GRID_SIZE;
         suAnswer[row][col] = index + 1;
         // save game
+        saveGameInfo();
         // ---------
         removeError();
         checkError(index + 1);
@@ -196,6 +224,10 @@ const initNumberInputEvent = () => {
         //   cells[selectedCell].classList.remove('zoom-in');
         // }, 500);
         // check game win
+        if (isGameWin()) {
+          removeGameInfo();
+          showResult();
+        }
         // --------------
       }
     })
@@ -249,6 +281,14 @@ resumeButton.addEventListener('click', () => {
 });
 newGameButton.addEventListener('click', () => {
   returnStartScreen();
+});
+deleteButton.addEventListener('click', () => {
+  cells[selectedCell].innerHTML = '';
+  cells[selectedCell].setAttribute('data-value', 0);
+  let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+  let col = selectedCell % CONSTANT.GRID_SIZE;
+  suAnswer[row][col] = 0;
+  removeError();
 });
 // ----------------
 
