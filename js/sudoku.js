@@ -103,7 +103,6 @@ const sudokuCheck = (grid) => {
     col: -1
   }
   if (!findUnassignedPos(grid, unassignedPos)) return true;
-
   grid.forEach((row, i) => {
     row.forEach((num, j) => {
       if (isSafe(grid, i, j, num)) {
@@ -119,16 +118,16 @@ const sudokuCheck = (grid) => {
   })
   return isFullGrid(grid);
 }
-const random = () => Math.floor(Math.random() * CONSTANT.GRID_SIZE);
+const rand = () => Math.floor(Math.random() * CONSTANT.GRID_SIZE);
 const removeCells = (grid, level) => {
   let res = [...grid];
   let attempts = level;
   while (attempts > 0) {
-    let row = random();
-    let col = random();
+    let row = rand();
+    let col = rand();
     while (res[row][col] === 0) {
-      row = random();
-      col = random();
+      row = rand();
+      col = rand();
     }
     res[row][col] = CONSTANT.UNASSIGNED;
     attempts--;
