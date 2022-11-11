@@ -152,7 +152,7 @@ const checkError = (value) => {
   for (let i = 0; i < CONSTANT.BOX_SIZE; i++) {
     for (let j = 0; j < CONSTANT.BOX_SIZE; j++) {
       let cell = cells[9 * (boxStartRow + i) + (boxStartCol + j)];
-      if (cell.classList.contains('selected')) addError(cell);
+      if (!cell.classList.contains('selected')) addError(cell);
     }  
   }
   let step = 9;
@@ -176,7 +176,7 @@ const checkError = (value) => {
     step += 1;
   }
 }
-const removeError = () => cells.forEach(e => e.classList.remove('error'))
+const removeError = () => cells.forEach(e => e.classList.remove('error'));
 const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
@@ -191,10 +191,10 @@ const initNumberInputEvent = () => {
         // ---------
         removeError();
         checkError(index + 1);
-        cells[selectedCell].classList.add('zoom-in');
-        setTimeout(() => {
-          cells[selectedCell].classList.remove('zoom-in');
-        }, 500);
+        // cells[selectedCell].classList.add('zoom-in');
+        // setTimeout(() => {
+        //   cells[selectedCell].classList.remove('zoom-in');
+        // }, 500);
         // check game win
         // --------------
       }

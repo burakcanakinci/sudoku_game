@@ -9,6 +9,7 @@
   --white: #fff;
   --black: #000;
   --red: #c30000;
+  --error: #ED98A6;
   --green: #00bc00;
   --blue: #0072e3;
 
@@ -182,11 +183,11 @@ nav {
   background-color: var(--filled-bg);
   color: var(--filled-color);
 }
+
 /* .main__grid-cell:hover {
   border: 1px solid var(--blue);
 } */
 .main__grid-cell.hover {
-  /* border: 1px solid var(--selected-bg); */
   background-color: var(--number-hover);
 }
 .main__grid-cell.selected {
@@ -194,9 +195,11 @@ nav {
   color: var(--white);
 }
 .main__grid-cell.error {
-  background-color: var(--red);
+  background-color: var(--error);
   color: var(--white);
 }
+
+
 .main__game-info {
   display: grid;
   grid-template-columns: 1fr;
@@ -295,6 +298,6 @@ nav {
     transform: scale(1);
   }
 }
-.cell-err {
+.cell-error {
   animation: zoom-out-shake 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
