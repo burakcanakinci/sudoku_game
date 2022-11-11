@@ -19,6 +19,7 @@ let pause = false;
 let seconds = 0;
 let su = undefined;
 let suAnswer = undefined;
+let selectedCell = -1;
 // --------------
 
 
@@ -130,6 +131,50 @@ const hoverBg = (index) => {
 const resetBg = () => {
   cells.forEach(e => e.classList.remove('hover'));
 }
+
+const checkError = (value) => {
+  const addError = (cell) => {
+    if (parseInt(cell.getAttribute('data-value')) === value) {
+      cell.classList.add('error');
+      cell.classList.add('cell-error');
+      setTimeout(() => {
+        cell.classList.remove('cell-error');
+      }, 500);
+    }
+  }
+  let index = selectedCell;
+  let row = Math.floor(index / CONSTANT.GRID_SIZE);
+  let col = index % CONSTANT.GRID_SIZE;
+  let boxStartRow = row - row % 3;
+  let boxStartCol = col - col % 3;
+  for (let i = 0; i < CONSTANT.BOX_SIZE; i++) {
+    for (let j = 0; j < CONSTANT.BOX_SIZE; j++) {
+      let cell = cells[9 * (boxStartRow + i) + (boxStartCol + j)];
+      if (cell.classList.contains('selected')) addError(cell);
+    }  
+  }
+  let step = 9;
+  while (index - step >= 0) {
+    addError(cells[index - step]);
+    step += 9;
+  }
+  step = 9;
+  while (index + step < 81) {
+    addError(cells[index + step]);
+    step += 9;
+  }
+  step = 1;
+  while (index - step >= 9*row) {
+    addError(cells[index - step]);
+    step += 1;
+  }
+  step = 1;
+  while (index + step < 9*row + 9) {
+    addError(cells[index + step]);
+    step += 1;
+  }
+}
+
 const initCellsEvent = () => {
   cells.forEach((e, index) => {
     e.addEventListener('click', () => {
