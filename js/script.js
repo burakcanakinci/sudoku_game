@@ -206,7 +206,7 @@ const saveGameInfo = () => {
 }
 const removeGameInfo = () => {
   localStorage.removeItem('game');
-  document.querySelector('#btn__continue').style.display = 'none';
+  continueButton.style.display = 'none';
 }
 const isGameWin = () => sudokuCheck(suAnswer);
 const showResult = () => {
@@ -312,7 +312,7 @@ deleteButton.addEventListener('click', () => {
 // ----------------
 const init = () => {
   const game = getGameInfo();
-  document.querySelector('#btn__continue').style.display = game ? 'grid':'none';
+  continueButton.style.display = game ? 'grid':'none';
   initGameGrid();
   initCellsEvent();
   initNumberInputEvent();
