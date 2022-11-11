@@ -40,7 +40,17 @@ const setPlayerName = (name) => localStorage.setItem('playerName', name);
 const getPlayerName = () => localStorage.getItem('playerName');
 const showTime = (seconds) => new Date(seconds * 1000).toISOString().substr(11, 8);
 
+const clearSudoku = () => {
+  for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
+    cells[i].innerHTML = '';
+    cells[i].classList.remove('filled');
+    cells[i].classList.remove('selected');
+  }
+}
+
 const initSudoku = () => {
+  // clear old sudoku
+  clearSudoku();
   // generate sudoku puzzle here
   su = sudokuGen(level);
   suAnswer = [...su.question];
@@ -57,7 +67,6 @@ const initSudoku = () => {
     }
   }
 }
-
 const startGame = () => {
   startScreen.classList.remove('active');
   gameScreen.classList.add('active');
@@ -76,7 +85,6 @@ const startGame = () => {
     }
   }, 1000);
 }
-
 const returnStartScreen = () => {
   clearInterval(timer);
   pause = false;
@@ -86,7 +94,33 @@ const returnStartScreen = () => {
   pauseScreen.classList.remove('active');
   pauseButton.classList.remove('active');
 }
-
+const hoverBg = (index) => {
+  let row = Math.floor(index / CONSTANT.GRID_SIZE);
+  let col = index % CONSTANT.GRID_SIZE;
+  let boxStartRow = row - row % 3;
+  let boxStartCol = col - col % 3;
+  for (let i = 0; i < CONSTANT.BOX_SIZE; i++) {
+    for (let j = 0; j < CONSTANT.BOX_SIZE; j++) {
+      let cell = cells[9 * (boxStartRow + i) + (boxStartCol + j)]
+      cells.classList.add('hover');
+    }  
+  }
+  let step = 9;
+  while (index - step >= 0) {
+    cells[index - step].classList.add('hover');
+    step += 9;
+  }
+  step = 9;
+  while (index + step < 81) {
+    cells[index + step].classList.add('hover');
+    step += 9;
+  }
+  step = 1;
+  while (index + step < 9*row + 9) {
+    cells[index + step].classList.add('hover');
+    step += 1;
+  }
+}
 
 
 // add button event
