@@ -16,6 +16,7 @@ const deleteButton = document.querySelector('#btn__delete');
 const playButton = document.querySelector('#btn__play');
 const levelButton = document.querySelector('#btn__level');
 const continueButton = document.querySelector('#btn__continue');
+const toggleButton = document.querySelector('#btn__toggle');
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex];
 let timer = null;

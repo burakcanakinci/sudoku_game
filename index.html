@@ -37,7 +37,17 @@
     <div class="main__game-screen" id="game-screen">
       <div class="main__sudoku-grid">
         <!-- 81 cells -->
-        <div class="main__grid-cell"></div>
+        <div class="main__grid-cell">
+          <div class="grid-cell-notes">1</div>
+          <div class="">2</div>
+          <div class="">3</div>
+          <div class="">4</div>
+          <div class="">5</div>
+          <div class="">6</div>
+          <div class="">7</div>
+          <div class="">8</div>
+          <div class="">9</div>
+        </div>
         <div class="main__grid-cell"></div>
         <div class="main__grid-cell"></div>
         <div class="main__grid-cell"></div>
@@ -127,7 +137,7 @@
           <span id="game-level"></span>
         </div>
         <div class="main__game-info__box main__game-info__time">
-          <span id="game-time"></span>
+          <span id="game-time">00:00:00</span>
           <div class="btn__pause" id="btn__pause">
             <i class="bx bx-pause"></i>
           </div>
@@ -142,6 +152,7 @@
           <div class="number">7</div>
           <div class="number">8</div>
           <div class="number">9</div>
+          <div class="number__toggle" id="btn__toggle">Note</div>
           <div class="number__delete" id="btn__delete">X</div>
         </div>
       </div>

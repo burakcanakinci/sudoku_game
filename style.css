@@ -15,6 +15,7 @@
   --nav-size: 70px;
   --cell-size: 50px;
   --border-radius: 10px;
+  --font-size-s: 1rem;
   --font-size-m: 1.5rem;
   --font-size-l: 2rem;
   --font-size-xl: 3rem;
@@ -264,6 +265,20 @@ nav {
 .number__delete:hover {
   background-color: #980000;
 }
+.number__toggle {
+  display: grid;
+  height: var(--cell-size);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-main);
+  color: var(--blue);
+  place-items: center;
+  font-size: var(--font-size-s);
+  cursor: pointer;
+  transition: .2s;
+}
+.number__toggle:hover {
+  background-color: var(--number-hover);
+}
 .main__pause-screen {
   display: none;
   position: absolute;
@@ -292,4 +307,8 @@ nav {
   100% {
     transform: scale(1);
   }
+}
+.grid-cell-notes {
+  display: grid;
+  
 }
