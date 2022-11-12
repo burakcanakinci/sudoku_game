@@ -31,7 +31,7 @@ const getGameInfo = () => JSON.parse(localStorage.getItem('game'));
 const initGameGrid = () => {
   let index = 0;
   for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
-    let row = Math.floor(i/CONSTANT.GRID_SIZE);
+    let row = Math.floor(i / CONSTANT.GRID_SIZE);
     let col = i % CONSTANT.GRID_SIZE;
     if (row === 2 || row === 5) cells[index].style.borderBottom = 'solid 1px black';
     if (col === 2 || col === 5) cells[index].style.borderRight = 'solid 1px black';
@@ -212,9 +212,8 @@ const removeGameInfo = () => {
 const isGameWin = () => sudokuCheck(suAnswer);
 const showResult = () => {
   clearInterval(timer);
+  // add green background color on win
   alert('win');
-  // show result screen
-  
 }
 const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {
@@ -309,6 +308,9 @@ deleteButton.addEventListener('click', () => {
   let col = selectedCell % CONSTANT.GRID_SIZE;
   suAnswer[row][col] = 0;
   removeError();
+});
+toggleButton.addEventListener('click', () => {
+
 });
 // ----------------
 const init = () => {
