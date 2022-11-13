@@ -214,10 +214,15 @@ const removeGameInfo = () => {
 const isGameWin = () => sudokuCheck(suAnswer);
 const showResult = () => {
   clearInterval(timer);
-  // add green background color on win
   winScreen.classList.add('win-screen__active');
   winScreen.classList.remove('win-screen');
   winBg.classList.add('main__active');
+  setTimeout(() => {
+    returnStartScreen();
+    winScreen.classList.remove('win-screen__active');
+    winScreen.classList.add('win-screen');
+    winBg.classList.remove('main__active');
+  }, 5000);
 }
 const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {
@@ -328,5 +333,6 @@ const init = () => {
   } else {
     nameInput.focus();
   }
+  showResult();
 }
 init();
