@@ -17,6 +17,8 @@ const playButton = document.querySelector('#btn__play');
 const levelButton = document.querySelector('#btn__level');
 const continueButton = document.querySelector('#btn__continue');
 const toggleButton = document.querySelector('#btn__toggle');
+const winScreen = document.querySelector('#win-screen');
+const winBg = document.querySelector('#main');
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex];
 let timer = null;
@@ -213,7 +215,9 @@ const isGameWin = () => sudokuCheck(suAnswer);
 const showResult = () => {
   clearInterval(timer);
   // add green background color on win
-  alert('win');
+  winScreen.classList.add('win-screen__active');
+  winScreen.classList.remove('win-screen');
+  winBg.classList.add('main__active');
 }
 const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {

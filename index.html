@@ -20,7 +20,7 @@
   </nav>
   <!-- end of top nav -->
   <!-- main -->
-  <div class="main">
+  <div class="main" id="main">
     <!-- start screen -->
     <div class="screen">
       <div class="screen__start active" id="start-screen">
@@ -35,6 +35,7 @@
     <!-- end of start screen -->
     <!-- game screen -->
     <div class="main__game-screen" id="game-screen">
+    <div class="win-screen win-screen__active" id="win-screen">CONGRATS!</div>
       <div class="main__sudoku-grid">
         <!-- 81 cells -->
         <div class="main__grid-cell"></div>
@@ -146,7 +147,6 @@
           <div class="number__delete" id="btn__delete">X</div>
         </div>
       </div>
-      
     </div>
     <!-- end of game screen -->
     <!-- pause screen -->

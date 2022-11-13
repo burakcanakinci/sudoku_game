@@ -10,7 +10,7 @@
   --black: #000;
   --red: #c30000;
   --error: #ED98A6;
-  --green: #00bc00;
+  --green: #00e400;
   --blue: #0072e3;
   --nav-size: 70px;
   --cell-size: 50px;
@@ -146,6 +146,9 @@ nav {
   padding-top: var(--nav-size);
   display: grid;
   place-items: center;
+}
+.main__active {
+  background-color: var(--green);
 }
 .main__game-screen {
   display: none;
@@ -311,4 +314,19 @@ nav {
 .grid-cell-notes {
   display: grid;
   
+}
+.win-screen__active {
+  position: fixed;
+  margin-left: 290px;
+  margin-top: 420px;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+.win-screen {
+  display: none;
+  position: fixed;
+  margin-left: 290px;
+  margin-top: 420px;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
 }
