@@ -47,8 +47,8 @@ const showTime = (seconds) => new Date(seconds * 1000).toISOString().substr(11, 
 const clearSudoku = () => {
   for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
     cells[i].innerHTML = '';
-    cells[i].classList.remove('filled');
-    cells[i].classList.remove('selected');
+    cells[i].classList.remove('main__grid-cell--filled');
+    cells[i].classList.remove('main__grid-cell--selected');
   }
 }
 const initSudoku = () => {
@@ -66,7 +66,7 @@ const initSudoku = () => {
     let col = i % CONSTANT.GRID_SIZE;
     cells[i].setAttribute('data-value', su.question[row][col]);
     if (su.question[row][col] !== 0) {
-      cells[i].classList.add('filled');
+      cells[i].classList.add('main__grid-cell--filled');
       cells[i].innerHTML = su.question[row][col];
     }
   }
@@ -86,13 +86,13 @@ const loadSudoku = () => {
     cells[i].setAttribute('data-value', suAnswer[row][col]);
     cells[i].innerHTML = suAnswer[row][col] !== 0 ? suAnswer[row][col] : '';
     if (su.question[row][col] !== 0) {
-      cells[i].classList.add('filled');
+      cells[i].classList.add('main__grid-cell--filled');
     }
   }
 }
 const startGame = () => {
-  startScreen.classList.remove('active');
-  gameScreen.classList.add('active');
+  startScreen.classList.remove('screen__start--active');
+  gameScreen.classList.add('main__game-screen--active');
 
   playerName.innerHTML = nameInput.value;
   setPlayerName(nameInput.value.trim());
@@ -112,10 +112,10 @@ const returnStartScreen = () => {
   clearInterval(timer);
   pause = false;
   seconds = 0;
-  startScreen.classList.add('active');
-  gameScreen.classList.remove('active');
-  pauseScreen.classList.remove('active');
-  pauseButton.classList.remove('active');
+  startScreen.classList.add('screen__start--active');
+  gameScreen.classList.remove('main__game-screen--active');
+  pauseScreen.classList.remove('main__pause-screen--active');
+  pauseButton.classList.remove('btn__pause--active');
 }
 const hoverBg = (index) => {
   let row = Math.floor(index / CONSTANT.GRID_SIZE);
@@ -125,41 +125,37 @@ const hoverBg = (index) => {
   for (let i = 0; i < CONSTANT.BOX_SIZE; i++) {
     for (let j = 0; j < CONSTANT.BOX_SIZE; j++) {
       let cell = cells[9 * (boxStartRow + i) + (boxStartCol + j)];
-      cell.classList.add('hover');
+      cell.classList.add('main__grid-cell--hover');
     }  
   }
   let step = 9;
   while (index - step >= 0) {
-    cells[index - step].classList.add('hover');
+    cells[index - step].classList.add('main__grid-cell--hover');
     step += 9;
   }
   step = 9;
   while (index + step < 81) {
-    cells[index + step].classList.add('hover');
+    cells[index + step].classList.add('main__grid-cell--hover');
     step += 9;
   }
   step = 1;
   while (index - step >= 9*row) {
-    cells[index - step].classList.add('hover');
+    cells[index - step].classList.add('main__grid-cell--hover');
     step += 1;
   }
   step = 1;
   while (index + step < 9*row + 9) {
-    cells[index + step].classList.add('hover');
+    cells[index + step].classList.add('main__grid-cell--hover');
     step += 1;
   }
 }
 const resetBg = () => {
-  cells.forEach(e => e.classList.remove('hover'));
+  cells.forEach(e => e.classList.remove('main__grid-cell--hover'));
 }
 const checkError = (value) => {
   const addError = (cell) => {
     if (parseInt(cell.getAttribute('data-value')) === value) {
-      cell.classList.add('error');
-      // cell.classList.add('cell-error');
-      // setTimeout(() => {
-      //   cell.classList.remove('cell-error');
-      // }, 500);
+      cell.classList.add('main__grid-cell--error');
     }
   }
   let index = selectedCell;
@@ -170,7 +166,7 @@ const checkError = (value) => {
   for (let i = 0; i < CONSTANT.BOX_SIZE; i++) {
     for (let j = 0; j < CONSTANT.BOX_SIZE; j++) {
       let cell = cells[9 * (boxStartRow + i) + (boxStartCol + j)];
-      if (!cell.classList.contains('selected')) addError(cell);
+      if (!cell.classList.contains('main__grid-cell--selected')) addError(cell);
     }  
   }
   let step = 9;
@@ -194,7 +190,7 @@ const checkError = (value) => {
     step += 1;
   }
 }
-const removeError = () => cells.forEach(e => e.classList.remove('error'));
+const removeError = () => cells.forEach(e => e.classList.remove('main__grid-cell--error'));
 const saveGameInfo = () => {
   let game = {
     level: levelIndex,
@@ -214,15 +210,15 @@ const removeGameInfo = () => {
 const isGameWin = () => sudokuCheck(suAnswer);
 const showResult = () => {
   clearInterval(timer);
-  winScreen.classList.add('win-screen__active');
+  winScreen.classList.add('win-screen--active');
   winScreen.classList.remove('win-screen');
-  winBg.classList.add('main__active');
+  winBg.classList.add('main--active');
   setTimeout(() => {
     returnStartScreen();
-    winScreen.classList.remove('win-screen__active');
+    winScreen.classList.remove('win-screen--active');
     winScreen.classList.add('win-screen');
-    winBg.classList.remove('main__active');
-  }, 5000);
+    winBg.classList.remove('main--active');
+  }, 6000);
 }
 const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {
@@ -239,10 +235,6 @@ const initNumberInputEvent = () => {
         // ---------
         removeError();
         checkError(index + 1);
-        // cells[selectedCell].classList.add('zoom-in');
-        // setTimeout(() => {
-        //   cells[selectedCell].classList.remove('zoom-in');
-        // }, 500);
         // check game win
         if (isGameWin()) {
           removeGameInfo();
@@ -256,11 +248,11 @@ const initNumberInputEvent = () => {
 const initCellsEvent = () => {
   cells.forEach((e, index) => {
     e.addEventListener('click', () => {
-      if (!e.classList.contains('filled')) {
-        cells.forEach(e => e.classList.remove('selected'));
+      if (!e.classList.contains('main__grid-cell--filled')) {
+        cells.forEach(e => e.classList.remove('main__grid-cell--selected'));
         selectedCell = index;
-        e.classList.remove('error');
-        e.classList.add('selected');
+        e.classList.remove('main__grid-cell--error');
+        e.classList.add('main__grid-cell--selected');
         resetBg();
         hoverBg(index);
       }
@@ -298,13 +290,13 @@ continueButton.addEventListener('click', () => {
   }
 });
 pauseButton.addEventListener('click', () => {
-  pauseScreen.classList.add('active');
-  pauseButton.classList.add('active');
+  pauseScreen.classList.add('main__pause-screen--active');
+  pauseButton.classList.add('btn__pause--active');
   pause = true;
 });
 resumeButton.addEventListener('click', () => {
-  pauseScreen.classList.remove('active');
-  pauseButton.classList.remove('active');
+  pauseScreen.classList.remove('main__pause-screen--active');
+  pauseButton.classList.remove('btn__pause--active');
   pause = false;
 });
 newGameButton.addEventListener('click', () => {
@@ -319,7 +311,7 @@ deleteButton.addEventListener('click', () => {
   removeError();
 });
 toggleButton.addEventListener('click', () => {
-
+// Note button
 });
 // ----------------
 const init = () => {
@@ -333,6 +325,5 @@ const init = () => {
   } else {
     nameInput.focus();
   }
-  showResult();
 }
 init();

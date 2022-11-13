@@ -117,7 +117,7 @@ nav {
   align-items: center;
   justify-content: center;
 }
-.screen__start.active {
+.screen__start--active {
   transform: translateX(0);
 }
 .screen__start > * + * {
@@ -147,7 +147,7 @@ nav {
   display: grid;
   place-items: center;
 }
-.main__active {
+.main--active {
   background-color: var(--green);
 }
 .main__game-screen {
@@ -159,7 +159,7 @@ nav {
   /* transform: translateX(150%); */
   transition: transform .3s ease-in-out;
 }
-.main__game-screen.active {
+.main__game-screen--active {
   display: block ruby;
   /* transform: translateX(0); */
 }
@@ -178,26 +178,24 @@ nav {
   place-items: center;
   font-size: var(--font-size-m);
 }
-.main__grid-cell.filled {
+.main__grid-cell--filled {
   background-color: var(--filled-bg);
   color: var(--filled-color);
 }
-.main__grid-cell.hover {
+.main__grid-cell--hover {
   background-color: var(--number-hover);
 }
-.main__grid-cell.selected {
+.main__grid-cell--selected {
   background-color: var(--selected-bg);
   color: var(--white);
 }
-.main__grid-cell.error {
+.main__grid-cell--error {
   background-color: var(--error);
   color: var(--white);
 }
 .main__game-info {
   display: grid;
   grid-template-columns: 1fr;
-  /* margin-top: 440px; */
-  /* margin-bottom: 10px; */
   margin-left: 40px;
   gap: 10px;
   width: 300px;
@@ -231,7 +229,7 @@ nav {
   place-items: center;
   cursor: pointer;
 }
-.btn__pause.active {
+.btn__pause--active {
   display: none;
 }
 .numbers {
@@ -281,6 +279,7 @@ nav {
 }
 .number__toggle:hover {
   background-color: var(--number-hover);
+  opacity: 0.4;
 }
 .main__pause-screen {
   display: none;
@@ -294,13 +293,13 @@ nav {
   flex-direction: column;
   justify-content: center;
 }
-.main__pause-screen.active {
+.main__pause-screen--active {
   display: flex;
 }
 .main__pause-screen > * + * {
   margin-top: 20px;
 }
-.main__pause-screen.active .btn {
+.main__pause-screen--active .btn {
   animation: zoom-in .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 @keyframes zoom-in {
@@ -313,9 +312,8 @@ nav {
 }
 .grid-cell-notes {
   display: grid;
-  
 }
-.win-screen__active {
+.win-screen--active {
   position: fixed;
   margin-left: 290px;
   margin-top: 420px;

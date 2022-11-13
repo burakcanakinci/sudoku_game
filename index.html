@@ -15,7 +15,7 @@
   <!-- top nav -->
   <nav>
     <div class="nav__container">
-      <a href="#" class="nav__logo">Sudoku</a>
+      <a href="" class="nav__logo">Sudoku</a>
     </div>
   </nav>
   <!-- end of top nav -->
@@ -23,7 +23,7 @@
   <div class="main" id="main">
     <!-- start screen -->
     <div class="screen">
-      <div class="screen__start active" id="start-screen">
+      <div class="screen__start screen__start--active" id="start-screen">
         <input type="text" placeholder="Your name"
         class="input__name" id="input__name"
         maxlength="11">
@@ -35,7 +35,7 @@
     <!-- end of start screen -->
     <!-- game screen -->
     <div class="main__game-screen" id="game-screen">
-    <div class="win-screen win-screen__active" id="win-screen">CONGRATS!</div>
+    <div class="win-screen" id="win-screen">CONGRATS!</div>
       <div class="main__sudoku-grid">
         <!-- 81 cells -->
         <div class="main__grid-cell"></div>
@@ -155,11 +155,6 @@
       <div class="btn" id="btn__new-game">New Game</div>
     </div>
     <!-- end of pause screen -->
-    <!-- result screen -->
-    <!-- <div class="main__result-screen" id="result-screen">
-
-    </div> -->
-    <!-- end of result screen -->
   </div>
   <!-- end of main -->
   <script src="js/constant.js"></script>
