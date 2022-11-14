@@ -211,12 +211,10 @@ const isGameWin = () => sudokuCheck(suAnswer);
 const showResult = () => {
   clearInterval(timer);
   winScreen.classList.add('win-screen--active');
-  winScreen.classList.remove('win-screen');
   winBg.classList.add('main--active');
   setTimeout(() => {
     returnStartScreen();
     winScreen.classList.remove('win-screen--active');
-    winScreen.classList.add('win-screen');
     winBg.classList.remove('main--active');
   }, 6000);
 }

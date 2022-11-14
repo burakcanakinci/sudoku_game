@@ -310,16 +310,6 @@ nav {
     transform: scale(1);
   }
 }
-.grid-cell-notes {
-  display: grid;
-}
-.win-screen--active {
-  position: fixed;
-  margin-left: 290px;
-  margin-top: 420px;
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-}
 .win-screen {
   display: none;
   position: fixed;
@@ -327,4 +317,7 @@ nav {
   margin-top: 420px;
   font-size: var(--font-size-xl);
   font-weight: 700;
+}
+.win-screen--active {
+  display: flex !important;
 }
