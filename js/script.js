@@ -19,6 +19,8 @@ const continueButton = document.querySelector('#btn__continue');
 const toggleButton = document.querySelector('#btn__toggle');
 const winScreen = document.querySelector('#win-screen');
 const winBg = document.querySelector('#main');
+const candidates = document.querySelector('#candidate');
+const checkBox = document.querySelector('#checkbox');
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex];
 let timer = null;
@@ -91,16 +93,13 @@ const loadSudoku = () => {
   }
 }
 const startGame = () => {
-  startScreen.classList.remove('screen__start--active');
+  startScreen.classList.remove('main__start-screen__body--active');
   gameScreen.classList.add('main__game-screen--active');
-
   playerName.innerHTML = nameInput.value;
   setPlayerName(nameInput.value.trim());
-
   gameLevel.innerHTML = CONSTANT.LEVEL_NAME[levelIndex];
   seconds = 0;
   showTime(seconds);
-
   timer = setInterval(() => {
     if (!pause) {
       seconds = seconds + 1;
@@ -112,7 +111,7 @@ const returnStartScreen = () => {
   clearInterval(timer);
   pause = false;
   seconds = 0;
-  startScreen.classList.add('screen__start--active');
+  startScreen.classList.add('main__start-screen__body--active');
   gameScreen.classList.remove('main__game-screen--active');
   pauseScreen.classList.remove('main__pause-screen--active');
   pauseButton.classList.remove('btn__pause--active');
@@ -308,8 +307,28 @@ deleteButton.addEventListener('click', () => {
   suAnswer[row][col] = 0;
   removeError();
 });
-toggleButton.addEventListener('click', () => {
-// Note button
+toggleButton.addEventListener('change', () => {
+  if (checkBox.checked) {
+    candidates.classList.add('candidates');
+    candidates.setAttribute('data-value', 1);
+    // cells[selectedCell].candidates.setAttribute('data-value', index + 1);
+    console.log("myeh");
+    // numberInputs.forEach((e, index) => {
+    //   e.addEventListener('click', () => {
+    //     if (!cells[selectedCell].classList.contains('filled')) {
+    //       cells[selectedCell].innerHTML = index + 1;
+    //       candidates.classList.add('candidates');
+    //       cells[selectedCell].candidates.setAttribute('data-value', index + 1);
+    //       // add to answer
+    //       // let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+    //       // let col = selectedCell % CONSTANT.GRID_SIZE;
+    //       // suAnswer[row][col] = index + 1;
+    //     }
+    //   })
+    // })
+  } else {
+    console.log("No can do")
+  }
 });
 // ----------------
 const init = () => {

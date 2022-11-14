@@ -22,11 +22,10 @@
   <!-- main -->
   <div class="main" id="main">
     <!-- start screen -->
-    <div class="screen">
-      <div class="screen__start screen__start--active" id="start-screen">
+    <div class="main__start-screen">
+      <div class="main__start-screen__body" id="start-screen">
         <input type="text" placeholder="Your name"
-        class="input__name" id="input__name"
-        maxlength="11">
+        class="input__name" id="input__name" maxlength="11">
         <div class="btn" id="btn__level">Easy</div>
         <div class="btn" id="btn__continue">Continue</div>
         <div class="btn btn--blue" id="btn__play">New Game</div>
@@ -34,13 +33,19 @@
     </div>
     <!-- end of start screen -->
     <!-- game screen -->
-    <div class="main__game-screen" id="game-screen">
+    <div class="main__game-screen main__game-screen--active" id="game-screen">
     <div class="win-screen" id="win-screen">CONGRATS!</div>
       <div class="main__sudoku-grid">
         <!-- 81 cells -->
-        <div class="main__grid-cell"></div>
-        <div class="main__grid-cell"></div>
-        <div class="main__grid-cell"></div>
+        <div class="main__grid-cell">
+          <div class="" id="candidate">1</div>
+        </div>
+        <div class="main__grid-cell">
+          <div class="" id="candidate">1</div>
+        </div>
+        <div class="main__grid-cell">
+          <div class="" id="candidate">1</div>
+        </div>
         <div class="main__grid-cell"></div>
         <div class="main__grid-cell"></div>
         <div class="main__grid-cell"></div>
@@ -143,7 +148,13 @@
           <div class="number">7</div>
           <div class="number">8</div>
           <div class="number">9</div>
-          <div class="number__toggle" id="btn__toggle">Note</div>
+          <!--           onClick="if (document.getElementById('checkbox').checked) document.getElementById('checkbox').checked=false; else document.getElementById('checkbox').checked=true;">
+ -->
+          <div class="number__toggle" id="btn__toggle">
+          <label for="checkbox">Note</label>
+          <input type="checkbox" id="checkbox" name="checkbox">
+          </div>
+          <div></div>
           <div class="number__delete" id="btn__delete">X</div>
         </div>
       </div>

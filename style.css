@@ -98,13 +98,13 @@ nav {
   font-size: var(--font-size-l);
   color: var(--blue);
 }
-.screen {
+.main__start-screen {
   position: relative;
   overflow: hidden;
   height: 100%;
   min-width: 400px;
 }
-.screen__start {
+.main__start-screen__body {
   position: absolute;
   top: 0;
   left: 0;
@@ -117,10 +117,10 @@ nav {
   align-items: center;
   justify-content: center;
 }
-.screen__start--active {
+.main__start-screen__body--active {
   transform: translateX(0);
 }
-.screen__start > * + * {
+.main__start-screen__body > * + * {
   margin-top: 20px;
 }
 .btn {
@@ -233,7 +233,7 @@ nav {
   display: none;
 }
 .numbers {
-  margin-top: 20px;
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 5px;
@@ -277,9 +277,12 @@ nav {
   cursor: pointer;
   transition: .2s;
 }
+/* .number__toggle input:checked + label {
+  border: 1px solid var(--blue);
+  background-color: black;
+} */
 .number__toggle:hover {
   background-color: var(--number-hover);
-  opacity: 0.4;
 }
 .main__pause-screen {
   display: none;
@@ -320,4 +323,17 @@ nav {
 }
 .win-screen--active {
   display: flex !important;
+}
+.candidates {
+  height: var(--cell-size);
+  width: var(--cell-size);
+  color: var(--black);
+  display: grid;
+  place-items: center;
+  font-size: .40em;
+  letter-spacing: -.5px;
+}
+#checkbox {
+  width: 30px;
+  height: 30px;
 }

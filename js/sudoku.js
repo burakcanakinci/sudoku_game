@@ -72,7 +72,6 @@ const isFullGrid = (grid) => {
     });
   });
 }
-
 const sudokuCreate = (grid) => {
   let unassignedPos = {
     row: -1,
