@@ -314,19 +314,46 @@ deleteButton.addEventListener('click', () => {
 });
 toggleButton.addEventListener('change', () => {
   if (checkBox.checked) {
-    for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
-      let row = Math.floor(i / CONSTANT.GRID_SIZE);
-      let col = i % CONSTANT.GRID_SIZE;
-      cells[i].setAttribute('data-value', suAnswer[row][col]);
-      cells[i].innerHTML = suAnswer[row][col] !== 0 ? suAnswer[row][col] : '';
-      if (su.question[row][col] === 0) {
-        cells[i].classList.add('candidate');
-      }
-    }
+    cells[selectedCell].classList.add('candidate');
+    cells[selectedCell].innerHTML = '123';
+    cells[selectedCell].setAttribute('data-value', 0);
+    let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+    let col = selectedCell % CONSTANT.GRID_SIZE;
+    suAnswer[row][col] = 0;
   } else {
-    cells[i].classList.remove('candidate');
+    cells[selectedCell].classList.remove('candidate');
   }
+  // cells.forEach((e, index) => {
+  //   e.addEventListener('click', () => {
+  //     if (!e.classList.contains('main__grid-cell--filled')) {
+  //       selectedCell = index;
+  //     e.classList.add('main__grid-cell--selected');
+
+  //       cells[selectedCell].innerHTML = index + 1;
+  //       cells[selectedCell].setAttribute('data-candidates', index + 1);
+  //       cells[i].setAttribute('data-candidates', suAnswer[row][col]);
+  //       cells[i].innerHTML = suAnswer[row][col] !== 0 ? suAnswer[row][col] : '';
+  //       cells[i].innerHTML = 
+  //       e.classList.add('candidate');
+  //     }
+  //   })
+  // });
+
+
+    // }
+  //   cells.forEach((e, index) => {
+  //   e.addEventListener('click', () => {
+  //     if (!e.classList.contains('main__grid-cell--filled')) {
+  //       cells.forEach(e => e.classList.remove('main__grid-cell--selected'));
+  //       selectedCell = index;
+  //       e.classList.add('main__grid-cell--selected');
+  //       cells[i].classList.add('candidate');
+  //     }
+  //   })
+  // })
+
 });
+
 // ----------------
 const init = () => {
   const game = getGameInfo();
