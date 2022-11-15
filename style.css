@@ -324,14 +324,14 @@ nav {
 .win-screen--active {
   display: flex !important;
 }
-.candidates {
+.candidate {
   height: var(--cell-size);
   width: var(--cell-size);
   color: var(--black);
   display: grid;
   place-items: center;
-  font-size: .40em;
-  letter-spacing: -.5px;
+  font-size: .50em;
+  letter-spacing: .5px;
 }
 #checkbox {
   width: 30px;

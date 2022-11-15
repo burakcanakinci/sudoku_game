@@ -220,7 +220,7 @@ const showResult = () => {
 const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
-      if (!cells[selectedCell].classList.contains('filled')) {
+      if (!cells[selectedCell].classList.contains('main__grid-cell--filled')) {
         cells[selectedCell].innerHTML = index + 1;
         cells[selectedCell].setAttribute('data-value', index + 1);
         // add to answer
@@ -238,6 +238,11 @@ const initNumberInputEvent = () => {
           showResult();
         }
         // --------------
+        // for (su.question[row][col] === 0) {
+        //   if (checkBox.checked) {
+        //           candidates.classList.add('candidate');
+        //       }
+        // }
       }
     })
   })
@@ -309,25 +314,17 @@ deleteButton.addEventListener('click', () => {
 });
 toggleButton.addEventListener('change', () => {
   if (checkBox.checked) {
-    candidates.classList.add('candidates');
-    candidates.setAttribute('data-value', 1);
-    // cells[selectedCell].candidates.setAttribute('data-value', index + 1);
-    console.log("myeh");
-    // numberInputs.forEach((e, index) => {
-    //   e.addEventListener('click', () => {
-    //     if (!cells[selectedCell].classList.contains('filled')) {
-    //       cells[selectedCell].innerHTML = index + 1;
-    //       candidates.classList.add('candidates');
-    //       cells[selectedCell].candidates.setAttribute('data-value', index + 1);
-    //       // add to answer
-    //       // let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-    //       // let col = selectedCell % CONSTANT.GRID_SIZE;
-    //       // suAnswer[row][col] = index + 1;
-    //     }
-    //   })
-    // })
+    for (let i = 0; i < Math.pow(CONSTANT.GRID_SIZE, 2); i++) {
+      let row = Math.floor(i / CONSTANT.GRID_SIZE);
+      let col = i % CONSTANT.GRID_SIZE;
+      cells[i].setAttribute('data-value', suAnswer[row][col]);
+      cells[i].innerHTML = suAnswer[row][col] !== 0 ? suAnswer[row][col] : '';
+      if (su.question[row][col] === 0) {
+        cells[i].classList.add('candidate');
+      }
+    }
   } else {
-    console.log("No can do")
+    cells[i].classList.remove('candidate');
   }
 });
 // ----------------

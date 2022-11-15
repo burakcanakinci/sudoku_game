@@ -23,7 +23,7 @@
   <div class="main" id="main">
     <!-- start screen -->
     <div class="main__start-screen">
-      <div class="main__start-screen__body" id="start-screen">
+      <div class="main__start-screen__body main__start-screen__body--active" id="start-screen">
         <input type="text" placeholder="Your name"
         class="input__name" id="input__name" maxlength="11">
         <div class="btn" id="btn__level">Easy</div>
@@ -33,18 +33,18 @@
     </div>
     <!-- end of start screen -->
     <!-- game screen -->
-    <div class="main__game-screen main__game-screen--active" id="game-screen">
+    <div class="main__game-screen" id="game-screen">
     <div class="win-screen" id="win-screen">CONGRATS!</div>
       <div class="main__sudoku-grid">
         <!-- 81 cells -->
         <div class="main__grid-cell">
-          <div class="" id="candidate">1</div>
+          <div class="candidate" id="candidate">1</div>
         </div>
         <div class="main__grid-cell">
-          <div class="" id="candidate">1</div>
+          <div class="candidate" id="candidate">2</div>
         </div>
         <div class="main__grid-cell">
-          <div class="" id="candidate">1</div>
+          <div class="candidate" id="candidate">3</div>
         </div>
         <div class="main__grid-cell"></div>
         <div class="main__grid-cell"></div>
@@ -133,7 +133,7 @@
           <span id="game-level"></span>
         </div>
         <div class="main__game-info__box main__game-info__time">
-          <span id="game-time">00:00:00</span>
+          <span id="game-time"></span>
           <div class="btn__pause" id="btn__pause">
             <i class="bx bx-pause"></i>
           </div>
