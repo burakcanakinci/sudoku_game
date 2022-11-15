@@ -238,11 +238,6 @@ const initNumberInputEvent = () => {
           showResult();
         }
         // --------------
-        // for (su.question[row][col] === 0) {
-        //   if (checkBox.checked) {
-        //           candidates.classList.add('candidate');
-        //       }
-        // }
       }
     })
   })
@@ -314,14 +309,29 @@ deleteButton.addEventListener('click', () => {
 });
 toggleButton.addEventListener('change', () => {
   if (checkBox.checked) {
-    cells[selectedCell].classList.add('candidate');
-    cells[selectedCell].innerHTML = '123';
-    cells[selectedCell].setAttribute('data-value', 0);
-    let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-    let col = selectedCell % CONSTANT.GRID_SIZE;
-    suAnswer[row][col] = 0;
+    // cells[selectedCell].classList.add('candidate');
+    // cells[selectedCell].innerHTML = '123';
+    // cells[selectedCell].setAttribute('data-value', 0);
+    // let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+    // let col = selectedCell % CONSTANT.GRID_SIZE;
+    // suAnswer[row][col] = 0;
+    numberInputs.forEach((e, index) => {
+      e.addEventListener('click', () => {
+        if (!cells[selectedCell].classList.contains('main__grid-cell--filled')) {
+          cells[selectedCell].classList.add('candidate');
+          cells[selectedCell].innerHTML = index + 1;
+          // cells[selectedCell].setAttribute('data-value', index + 1);
+          // add to answer
+          let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+          let col = selectedCell % CONSTANT.GRID_SIZE;
+          suAnswer[row][col] = 0;
+          // --------------
+        }
+      })
+    })
   } else {
     cells[selectedCell].classList.remove('candidate');
+    initNumberInputEvent();
   }
   // cells.forEach((e, index) => {
   //   e.addEventListener('click', () => {
@@ -339,8 +349,6 @@ toggleButton.addEventListener('change', () => {
   //   })
   // });
 
-
-    // }
   //   cells.forEach((e, index) => {
   //   e.addEventListener('click', () => {
   //     if (!e.classList.contains('main__grid-cell--filled')) {
@@ -352,8 +360,12 @@ toggleButton.addEventListener('change', () => {
   //   })
   // })
 
+  // for (su.question[row][col] === 0) {
+  //   if (checkBox.checked) {
+  //           candidates.classList.add('candidate');
+  //       }
+  // }
 });
-
 // ----------------
 const init = () => {
   const game = getGameInfo();
