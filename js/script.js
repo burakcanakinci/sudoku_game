@@ -218,29 +218,31 @@ const showResult = () => {
   }, 6000);
 }
 const initNumberInputEvent = () => {
-  numberInputs.forEach((e, index) => {
-    e.addEventListener('click', () => {
-      if (!cells[selectedCell].classList.contains('main__grid-cell--filled')) {
-        cells[selectedCell].innerHTML = index + 1;
-        cells[selectedCell].setAttribute('data-value', index + 1);
-        // add to answer
-        let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-        let col = selectedCell % CONSTANT.GRID_SIZE;
-        suAnswer[row][col] = index + 1;
-        // save game
-        saveGameInfo();
-        // ---------
-        removeError();
-        checkError(index + 1);
-        // check game win
-        if (isGameWin()) {
-          removeGameInfo();
-          showResult();
+  if (!checkBox.checked) {
+    numberInputs.forEach((e, index) => {
+      e.addEventListener('click', () => {
+        if (!cells[selectedCell].classList.contains('main__grid-cell--filled')) {
+          cells[selectedCell].innerHTML = index + 1;
+          cells[selectedCell].setAttribute('data-value', index + 1);
+          // add to answer
+          let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+          let col = selectedCell % CONSTANT.GRID_SIZE;
+          suAnswer[row][col] = index + 1;
+          // save game
+          saveGameInfo();
+          // ---------
+          removeError();
+          checkError(index + 1);
+          // check game win
+          if (isGameWin()) {
+            removeGameInfo();
+            showResult();
+          }
+          // --------------
         }
-        // --------------
-      }
+      })
     })
-  })
+  }
 }
 const initCellsEvent = () => {
   cells.forEach((e, index) => {
@@ -309,26 +311,27 @@ deleteButton.addEventListener('click', () => {
 });
 toggleButton.addEventListener('change', () => {
   if (checkBox.checked) {
-    // cells[selectedCell].classList.add('candidate');
-    // cells[selectedCell].innerHTML = '123';
-    // cells[selectedCell].setAttribute('data-value', 0);
-    // let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-    // let col = selectedCell % CONSTANT.GRID_SIZE;
-    // suAnswer[row][col] = 0;
-    numberInputs.forEach((e, index) => {
-      e.addEventListener('click', () => {
-        if (!cells[selectedCell].classList.contains('main__grid-cell--filled')) {
-          cells[selectedCell].classList.add('candidate');
-          cells[selectedCell].innerHTML = index + 1;
-          // cells[selectedCell].setAttribute('data-value', index + 1);
-          // add to answer
-          let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-          let col = selectedCell % CONSTANT.GRID_SIZE;
-          suAnswer[row][col] = 0;
-          // --------------
-        }
-      })
-    })
+    cells[selectedCell].classList.add('candidate');
+    let fill = index + 1;
+    // cells[selectedCell].innerHTML = index.fill
+    cells[selectedCell].setAttribute('data-value', 0);
+    let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+    let col = selectedCell % CONSTANT.GRID_SIZE;
+    suAnswer[row][col] = 0;
+    // numberInputs.forEach((e, index) => {
+    //   e.addEventListener('click', () => {
+    //     if (!cells[selectedCell].classList.contains('main__grid-cell--filled')) {
+    //       cells[selectedCell].classList.add('candidate');
+    //       cells[selectedCell].innerHTML = index + 1;
+    //       // cells[selectedCell].setAttribute('data-value', index + 1);
+    //       // add to answer
+    //       let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+    //       let col = selectedCell % CONSTANT.GRID_SIZE;
+    //       suAnswer[row][col] = 0;
+    //       // --------------
+    //     }
+    //   })
+    // })
   } else {
     cells[selectedCell].classList.remove('candidate');
     initNumberInputEvent();
