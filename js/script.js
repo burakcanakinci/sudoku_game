@@ -218,10 +218,9 @@ const showResult = () => {
   }, 6000);
 }
 const initNumberInputEvent = () => {
-  if (!checkBox.checked) {
     numberInputs.forEach((e, index) => {
       e.addEventListener('click', () => {
-        if (!cells[selectedCell].classList.contains('main__grid-cell--filled')) {
+        if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && !checkBox.checked) {
           cells[selectedCell].innerHTML = index + 1;
           cells[selectedCell].setAttribute('data-value', index + 1);
           // add to answer
@@ -242,7 +241,6 @@ const initNumberInputEvent = () => {
         }
       })
     })
-  }
 }
 const initCellsEvent = () => {
   cells.forEach((e, index) => {
@@ -310,32 +308,37 @@ deleteButton.addEventListener('click', () => {
   removeError();
 });
 toggleButton.addEventListener('change', () => {
-  if (checkBox.checked) {
-    cells[selectedCell].classList.add('candidate');
-    let fill = index + 1;
-    // cells[selectedCell].innerHTML = index.fill
-    cells[selectedCell].setAttribute('data-value', 0);
-    let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-    let col = selectedCell % CONSTANT.GRID_SIZE;
-    suAnswer[row][col] = 0;
-    // numberInputs.forEach((e, index) => {
-    //   e.addEventListener('click', () => {
-    //     if (!cells[selectedCell].classList.contains('main__grid-cell--filled')) {
-    //       cells[selectedCell].classList.add('candidate');
-    //       cells[selectedCell].innerHTML = index + 1;
-    //       // cells[selectedCell].setAttribute('data-value', index + 1);
-    //       // add to answer
-    //       let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-    //       let col = selectedCell % CONSTANT.GRID_SIZE;
-    //       suAnswer[row][col] = 0;
-    //       // --------------
-    //     }
-    //   })
-    // })
-  } else {
-    cells[selectedCell].classList.remove('candidate');
-    initNumberInputEvent();
-  }
+
+    // cells[selectedCell].classList.add('candidate');
+    // candidates[selectedCell].innerHTML = index + 1;
+    // let fill = index + 1;
+    // // cells[selectedCell].innerHTML = index.fill
+    // cells[selectedCell].setAttribute('data-value', 0);
+    // // let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+    // // let col = selectedCell % CONSTANT.GRID_SIZE;
+    // // suAnswer[row][col] = 0;
+    // !cells[selectedCell].classList.contains('main__grid-cell--filled'
+    numberInputs.forEach((e, index) => {
+      e.addEventListener('click', () => {
+        if (checkBox.checked) {
+          cells[selectedCell].classList.add('candidate');
+          candidates[selectedCell].innerHTML = index + 1;
+          // cells[selectedCell].setAttribute('data-value', index + 1);
+          // add to answer
+          let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+          let col = selectedCell % CONSTANT.GRID_SIZE;
+          suAnswer[row][col] = 0;
+          // --------------
+        } else {
+            cells[selectedCell].classList.remove('candidate');
+        }
+      })
+    })
+  
+  // else {
+  //   cells[selectedCell].classList.remove('candidate');
+  //   initNumberInputEvent();
+  // }
   // cells.forEach((e, index) => {
   //   e.addEventListener('click', () => {
   //     if (!e.classList.contains('main__grid-cell--filled')) {
