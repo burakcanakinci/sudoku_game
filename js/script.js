@@ -21,6 +21,7 @@ const winScreen = document.querySelector('#win-screen');
 const winBg = document.querySelector('#main');
 const candidates = document.querySelector('#candidate');
 const checkBox = document.querySelector('#checkbox');
+const numberDiv = document.querySelectorAll('.numbers')
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex];
 let timer = null;
@@ -217,31 +218,56 @@ const showResult = () => {
     winBg.classList.remove('main--active');
   }, 6000);
 }
+//==================================================================
 const initNumberInputEvent = () => {
-    numberInputs.forEach((e, index) => {
-      e.addEventListener('click', () => {
-        if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && !checkBox.checked) {
-          cells[selectedCell].innerHTML = index + 1;
-          cells[selectedCell].setAttribute('data-value', index + 1);
-          // add to answer
-          let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-          let col = selectedCell % CONSTANT.GRID_SIZE;
-          suAnswer[row][col] = index + 1;
-          // save game
-          saveGameInfo();
-          // ---------
-          removeError();
-          checkError(index + 1);
-          // check game win
-          if (isGameWin()) {
-            removeGameInfo();
-            showResult();
-          }
-          // --------------
+  numberInputs.forEach((e, index) => {
+    e.addEventListener('click', () => {
+      if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && !checkBox.checked) {
+        cells[selectedCell].classList.remove('candidate');
+        cells[selectedCell].innerHTML = index + 1;
+        cells[selectedCell].setAttribute('data-value', index + 1);
+        // add to answer
+        let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+        let col = selectedCell % CONSTANT.GRID_SIZE;
+        suAnswer[row][col] = index + 1;
+        // save game
+        saveGameInfo();
+        // ---------
+        removeError();
+        checkError(index + 1);
+        // check game win
+        if (isGameWin()) {
+          removeGameInfo();
+          showResult();
         }
-      })
+        // --------------
+      }
     })
+  })    
+      // let value = numberInputs.getAttribute('data-value');
+      // candidateArray.forEach(candidateArray => cells[selectedCell].innerHTML = candidateArray);
+      // for (i in candidateArray) {
+      //   cells[selectedCell].innerHTML = `${candidateArray[i]}`;
+      //   // cells[selectedCell].setAttribute('data-value', candidateArray[i]);
+      // }
+      // --------------
 }
+const candidateEvent = () => {
+  
+  numberInputs.forEach((e, index) => {
+    e.addEventListener('click', () => {
+      
+      if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked) {
+        let candidateArray = [];
+        let newCandidate = `${index + 1}`;
+        candidateArray.push(newCandidate);
+        cells[selectedCell].classList.add('candidate');
+        cells[selectedCell].innerHTML = candidateArray;
+      }
+    })
+  })
+}
+//==================================================================
 const initCellsEvent = () => {
   cells.forEach((e, index) => {
     e.addEventListener('click', () => {
@@ -307,71 +333,72 @@ deleteButton.addEventListener('click', () => {
   suAnswer[row][col] = 0;
   removeError();
 });
-toggleButton.addEventListener('change', () => {
+// toggleButton.addEventListener('click', () => {
 
-    // cells[selectedCell].classList.add('candidate');
-    // candidates[selectedCell].innerHTML = index + 1;
-    // let fill = index + 1;
-    // // cells[selectedCell].innerHTML = index.fill
-    // cells[selectedCell].setAttribute('data-value', 0);
-    // // let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-    // // let col = selectedCell % CONSTANT.GRID_SIZE;
-    // // suAnswer[row][col] = 0;
-    // !cells[selectedCell].classList.contains('main__grid-cell--filled'
-    numberInputs.forEach((e, index) => {
-      e.addEventListener('click', () => {
-        if (checkBox.checked) {
-          cells[selectedCell].classList.add('candidate');
-          candidates[selectedCell].innerHTML = index + 1;
-          // cells[selectedCell].setAttribute('data-value', index + 1);
-          // add to answer
-          let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-          let col = selectedCell % CONSTANT.GRID_SIZE;
-          suAnswer[row][col] = 0;
-          // --------------
-        } else {
-            cells[selectedCell].classList.remove('candidate');
-        }
-      })
-    })
+//     // cells[selectedCell].classList.add('candidate');
+//     // candidates[selectedCell].innerHTML = index + 1;
+//     // let fill = index + 1;
+//     // // cells[selectedCell].innerHTML = index.fill
+//     // cells[selectedCell].setAttribute('data-value', 0);
+//     // // let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+//     // // let col = selectedCell % CONSTANT.GRID_SIZE;
+//     // // suAnswer[row][col] = 0;
+//     // !cells[selectedCell].classList.contains('main__grid-cell--filled'
+//     numberInputs.forEach((e, index) => {
+//       e.addEventListener('click', () => {
+//         if (checkBox.checked) {
+//           cells[selectedCell].classList.add('candidate');
+//           candidates[selectedCell].innerHTML = index + 1;
+//           cells[selectedCell].setAttribute('data-value', index + 1);
+
+//           // add to answer
+//           let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+//           let col = selectedCell % CONSTANT.GRID_SIZE;
+//           suAnswer[row][col] = 0;
+//           // --------------
+//         } else {
+//             cells[selectedCell].classList.remove('candidate');
+//         }
+//       })
+//     })
   
-  // else {
-  //   cells[selectedCell].classList.remove('candidate');
-  //   initNumberInputEvent();
-  // }
-  // cells.forEach((e, index) => {
-  //   e.addEventListener('click', () => {
-  //     if (!e.classList.contains('main__grid-cell--filled')) {
-  //       selectedCell = index;
-  //     e.classList.add('main__grid-cell--selected');
+//   // else {
+//   //   cells[selectedCell].classList.remove('candidate');
+//   //   initNumberInputEvent();
+//   // }
+//   // cells.forEach((e, index) => {
+//   //   e.addEventListener('click', () => {
+//   //     if (!e.classList.contains('main__grid-cell--filled')) {
+//   //       selectedCell = index;
+//   //     e.classList.add('main__grid-cell--selected');
 
-  //       cells[selectedCell].innerHTML = index + 1;
-  //       cells[selectedCell].setAttribute('data-candidates', index + 1);
-  //       cells[i].setAttribute('data-candidates', suAnswer[row][col]);
-  //       cells[i].innerHTML = suAnswer[row][col] !== 0 ? suAnswer[row][col] : '';
-  //       cells[i].innerHTML = 
-  //       e.classList.add('candidate');
-  //     }
-  //   })
-  // });
+//   //       cells[selectedCell].innerHTML = index + 1;
+//   //       cells[selectedCell].setAttribute('data-candidates', index + 1);
+//   //       cells[i].setAttribute('data-candidates', suAnswer[row][col]);
+//   //       cells[i].innerHTML = suAnswer[row][col] !== 0 ? suAnswer[row][col] : '';
+//   //       cells[i].innerHTML = 
+//   //       e.classList.add('candidate');
+//   //     }
+//   //   })
+//   // });
 
-  //   cells.forEach((e, index) => {
-  //   e.addEventListener('click', () => {
-  //     if (!e.classList.contains('main__grid-cell--filled')) {
-  //       cells.forEach(e => e.classList.remove('main__grid-cell--selected'));
-  //       selectedCell = index;
-  //       e.classList.add('main__grid-cell--selected');
-  //       cells[i].classList.add('candidate');
-  //     }
-  //   })
-  // })
+//   //   cells.forEach((e, index) => {
+//   //   e.addEventListener('click', () => {
+//   //     if (!e.classList.contains('main__grid-cell--filled')) {
+//   //       cells.forEach(e => e.classList.remove('main__grid-cell--selected'));
+//   //       selectedCell = index;
+//   //       e.classList.add('main__grid-cell--selected');
+//   //       cells[i].classList.add('candidate');
+//   //     }
+//   //   })
+//   // })
 
-  // for (su.question[row][col] === 0) {
-  //   if (checkBox.checked) {
-  //           candidates.classList.add('candidate');
-  //       }
-  // }
-});
+//   // for (su.question[row][col] === 0) {
+//   //   if (checkBox.checked) {
+//   //           candidates.classList.add('candidate');
+//   //       }
+//   // }
+// });
 // ----------------
 const init = () => {
   const game = getGameInfo();
@@ -379,6 +406,7 @@ const init = () => {
   initGameGrid();
   initCellsEvent();
   initNumberInputEvent();
+  candidateEvent();
   if (getPlayerName()) {
     nameInput.value = getPlayerName();
   } else {
