@@ -258,12 +258,16 @@ const candidateEvent = () => {
     e.addEventListener('click', () => {
       
       if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked) {
-        let candidateArray = [];
-        let newCandidate = `${index + 1}`;
+        const candidateArray = [];
+        let newCandidate = index + 1;
         candidateArray.push(newCandidate);
+        
         cells[selectedCell].classList.add('candidate');
-        cells[selectedCell].innerHTML = candidateArray;
+        cells[selectedCell].innerHTML = [...candidateArray];
+        console.log(candidateArray);
+        
       }
+      
     })
   })
 }
