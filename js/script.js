@@ -252,29 +252,34 @@ const initNumberInputEvent = () => {
       // }
       // --------------
 }
+let concatArray = [];
 const candidateEvent = () => {
-  let candidateArray = [];
-  let concatArray = [];
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
-      // let candidateArray = index + 1;
-      const initialValue = index + 1;
-      candidateArray.push(initialValue);
-      concatArray.push(initialValue);
-      let lastCandidate = candidateArray.slice(-1);
-      let lastArray = concatArray.concat(lastCandidate);
-      
-      // let newCandidate = candidateArray.reduce(
-      //   (previousValue, currentValue) => previousValue + currentValue, initialValue
-      // );
       if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked) {
-        
+        let x = index + 1;
+        // let candidateArray = index + 1;
+        let candidateArray = [];
+        const initialValue = x;
+        candidateArray.push(initialValue);
+        concatArray.push(initialValue);
+        let lastCandidate = candidateArray.slice(-1);
+        concatArray.concat(lastCandidate);
+        let lastValue = concatArray.slice(-1);
+        cells[selectedCell].setAttribute('data-value', 0);
         cells[selectedCell].classList.add('candidate');
-        // candidateArray.forEach(el => cells[selectedCell].innerHTML = el);
+        // concatArray.forEach(el => cells[selectedCell].innerHTML = el);
         cells[selectedCell].innerHTML = concatArray;
         // cells[selectedCell].setAttribute('data-value', candidateArray);
+        // let newCandidate = candidateArray.reduce(
+      //   (previousValue, currentValue) => previousValue + currentValue, initialValue
+      // );
         console.log(candidateArray);
-        console.log(lastArray);
+        console.log(concatArray);
+        
+        if (lastValue == x) {
+          concatArray.slice(-1);
+        }
 
       }
       
@@ -346,6 +351,7 @@ deleteButton.addEventListener('click', () => {
   let col = selectedCell % CONSTANT.GRID_SIZE;
   suAnswer[row][col] = 0;
   removeError();
+  concatArray.length = 0;
 });
 // toggleButton.addEventListener('click', () => {
 
