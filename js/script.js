@@ -257,32 +257,39 @@ const candidateEvent = () => {
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
       if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked) {
+        let candidateArray = [];
+
         let x = index + 1;
         // let candidateArray = index + 1;
-        let candidateArray = [];
         const initialValue = x;
         candidateArray.push(initialValue);
         concatArray.push(initialValue);
         let lastCandidate = candidateArray.slice(-1);
         concatArray.concat(lastCandidate);
-        let lastValue = concatArray.slice(-1);
-        cells[selectedCell].setAttribute('data-value', 0);
+        let finalArray = concatArray.concat(lastCandidate);
+        let previousValue = concatArray[concatArray.length - 2];
+        let lastValue = concatArray[concatArray.length - 1];
         cells[selectedCell].classList.add('candidate');
         // concatArray.forEach(el => cells[selectedCell].innerHTML = el);
+        if (lastValue === previousValue) {
+          concatArray.pop();
+          concatArray.pop();
+        }
         cells[selectedCell].innerHTML = concatArray;
         // cells[selectedCell].setAttribute('data-value', candidateArray);
         // let newCandidate = candidateArray.reduce(
-      //   (previousValue, currentValue) => previousValue + currentValue, initialValue
-      // );
-        console.log(candidateArray);
+        //   (previousValue, currentValue) => previousValue + currentValue, initialValue
+        // );
+        console.log(previousValue);
+        console.log(lastValue);
         console.log(concatArray);
+        console.log(candidateArray);
         
-        if (lastValue == x) {
-          concatArray.slice(-1);
-        }
-
+        
       }
-      
+      if (!cells[selectedCell].classList.contains('candidate')) {
+        concatArray.length = 0;
+      }
     })
   })
 }
