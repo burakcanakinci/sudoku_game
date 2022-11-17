@@ -260,44 +260,39 @@ const candidateEvent = () => {
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
       if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked) {
+        cells[selectedCell].classList.add('candidate');
         let candidateArray = [];
-
         let x = index + 1;
-        // let candidateArray = index + 1;
         const initialValue = x;
-        // candidateArray.push(initialValue);
+        candidateArray.push(initialValue);
         concatArray.push(initialValue);
         let lastCandidate = candidateArray.slice(-1);
         concatArray.concat(lastCandidate);
         let previousValue = concatArray[concatArray.length - 2];
         let lastValue = concatArray[concatArray.length - 1];
-        cells[selectedCell].classList.add('candidate');
         // concatArray.forEach(el => cells[selectedCell].innerHTML = el);
-        if (lastValue === previousValue) {
+        if (lastValue == previousValue) {
           concatArray.pop();
           concatArray.pop();
-          // concatArray = [...new Set(concatArray)];
         }
         
-        if (concatArray.includes(1, 1)) {
-          const i = concatArray.indexOf(1);
-          concatArray.splice(i, 1);
-        }
-        if (concatArray.includes(2, 2)) {
-          const i = concatArray.indexOf(2);
-          concatArray.splice(i, 2);
-        }
-        // let finalArray = concatArray;
-        // cells[selectedCell].innerHTML = [...new Set(finalArray)];
-        cells[selectedCell].innerHTML = concatArray;
+        // cells[selectedCell].innerHTML = concatArray;
+
+        let finalArray = concatArray;
+        cells[selectedCell].innerHTML = [...new Set(finalArray)];
+
+        // function removeDuplicates(concatArray) {
+        //   return concatArray.filter((item,
+        //       i) => concatArray.indexOf(item) === i);
+        // }
         // cells[selectedCell].setAttribute('data-value', candidateArray);
         // let newCandidate = candidateArray.reduce(
         //   (previousValue, currentValue) => previousValue + currentValue, initialValue
         // );
         console.log(previousValue);
         console.log(lastValue);
-        console.log(concatArray);
         console.log(candidateArray);
+        console.log(concatArray);
       }
     })
   })
