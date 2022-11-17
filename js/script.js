@@ -190,7 +190,10 @@ const checkError = (value) => {
     step += 1;
   }
 }
-const removeError = () => cells.forEach(e => e.classList.remove('main__grid-cell--error'));
+const removeError = () => {
+  cells.forEach(e => e.classList.remove('main__grid-cell--error'));
+  concatArray.length = 0;
+}
 const saveGameInfo = () => {
   let game = {
     level: levelIndex,
@@ -262,11 +265,10 @@ const candidateEvent = () => {
         let x = index + 1;
         // let candidateArray = index + 1;
         const initialValue = x;
-        candidateArray.push(initialValue);
+        // candidateArray.push(initialValue);
         concatArray.push(initialValue);
         let lastCandidate = candidateArray.slice(-1);
         concatArray.concat(lastCandidate);
-        let finalArray = concatArray.concat(lastCandidate);
         let previousValue = concatArray[concatArray.length - 2];
         let lastValue = concatArray[concatArray.length - 1];
         cells[selectedCell].classList.add('candidate');
@@ -274,7 +276,19 @@ const candidateEvent = () => {
         if (lastValue === previousValue) {
           concatArray.pop();
           concatArray.pop();
+          // concatArray = [...new Set(concatArray)];
         }
+        
+        if (concatArray.includes(1, 1)) {
+          const i = concatArray.indexOf(1);
+          concatArray.splice(i, 1);
+        }
+        if (concatArray.includes(2, 2)) {
+          const i = concatArray.indexOf(2);
+          concatArray.splice(i, 2);
+        }
+        // let finalArray = concatArray;
+        // cells[selectedCell].innerHTML = [...new Set(finalArray)];
         cells[selectedCell].innerHTML = concatArray;
         // cells[selectedCell].setAttribute('data-value', candidateArray);
         // let newCandidate = candidateArray.reduce(
@@ -284,11 +298,6 @@ const candidateEvent = () => {
         console.log(lastValue);
         console.log(concatArray);
         console.log(candidateArray);
-        
-        
-      }
-      if (!cells[selectedCell].classList.contains('candidate')) {
-        concatArray.length = 0;
       }
     })
   })
@@ -358,7 +367,6 @@ deleteButton.addEventListener('click', () => {
   let col = selectedCell % CONSTANT.GRID_SIZE;
   suAnswer[row][col] = 0;
   removeError();
-  concatArray.length = 0;
 });
 // toggleButton.addEventListener('click', () => {
 
