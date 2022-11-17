@@ -253,19 +253,29 @@ const initNumberInputEvent = () => {
       // --------------
 }
 const candidateEvent = () => {
-  
+  let candidateArray = [];
+  let concatArray = [];
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
+      // let candidateArray = index + 1;
+      const initialValue = index + 1;
+      candidateArray.push(initialValue);
+      concatArray.push(initialValue);
+      let lastCandidate = candidateArray.slice(-1);
+      let lastArray = concatArray.concat(lastCandidate);
       
+      // let newCandidate = candidateArray.reduce(
+      //   (previousValue, currentValue) => previousValue + currentValue, initialValue
+      // );
       if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked) {
-        const candidateArray = [];
-        let newCandidate = index + 1;
-        candidateArray.push(newCandidate);
         
         cells[selectedCell].classList.add('candidate');
-        cells[selectedCell].innerHTML = [...candidateArray];
+        // candidateArray.forEach(el => cells[selectedCell].innerHTML = el);
+        cells[selectedCell].innerHTML = concatArray;
+        // cells[selectedCell].setAttribute('data-value', candidateArray);
         console.log(candidateArray);
-        
+        console.log(lastArray);
+
       }
       
     })
