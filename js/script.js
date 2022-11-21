@@ -225,8 +225,8 @@ const showResult = () => {
 const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
+      event.preventDefault();
       if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && !checkBox.checked) {
-        event.preventDefault();
         cells[selectedCell].classList.remove('candidate');
         cells[selectedCell].innerHTML = index + 1;
         cells[selectedCell].setAttribute('data-value', index + 1);
@@ -248,85 +248,37 @@ const initNumberInputEvent = () => {
     })
   })    
 }
-
 const concatArray = new Set();
-
 const candidateEvent = () => {
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
       if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked) {
-        event.preventDefault();
         cells[selectedCell].classList.add('candidate');
         // - select cell
         const selectCell = cells[selectedCell];
         // - select a value from the pad
         const padValue = index + 1;
-        //   -- if candidate move is selected
         //     - get candidate values container of selected cell
-        // concatArray.add(padValue);
-
-        if (concatArray.has(padValue)) {
-          concatArray.delete(padValue);
-        } else {
-        concatArray.add(padValue);
-        }
-
-        // if (concatArray.has(padValue)) {
-        //   concatArray.delete(padValue);
-        // } else {
-        //   concatArray.add(padValue);
-        // }
+        
         //     - get candidate values (if any), assign candidate
         // values to a data structure that can easily toggle values
         // (add / remove on repeated)
 
         //     - process candidate values ( add / remove )
-
+        if (concatArray.has(padValue)) {
+          concatArray.delete(padValue);
+        } else {
+          concatArray.add(padValue);
+        }
         //     - assign values back to selected cell candidate values container
-
-        //   -- if candidate move is not selected
-        //     - assign value to cell
-
-
-        // let candidateArray = [];
-        // let x = index + 1;
-        // const initialValue = x;
-        // candidateArray.push(initialValue);
-        // concatArray.push(initialValue);
-        // let lastCandidate = candidateArray.slice(-1);
-        // concatArray.concat(lastCandidate);
-        // let previousValue = concatArray[concatArray.length - 2];
-        // let lastValue = concatArray[concatArray.length - 1];
-        // // concatArray.forEach(el => cells[selectedCell].innerHTML = el);
-        // if (lastValue == previousValue) {
-        //   concatArray.pop();
-        //   concatArray.pop();
-        // }
-        console.log(concatArray);
-        console.log(padValue);
         
+        console.log(concatArray);
+        console.log(selectCell);
+        
+        cells[selectedCell].setAttribute('data-array', index + 1);
+
         let finalArray = concatArray;
         selectCell.innerHTML = [...new Set(finalArray)];
-        // cells[selectedCell].innerHTML = concatArray;
-        
-        // function removeDuplicates(concatArray) {
-        //   return concatArray.filter((item,
-        //       i) => concatArray.indexOf(item) === i);
-        // }
-        // cells[selectedCell].setAttribute('data-value', candidateArray);
-        // let newCandidate = candidateArray.reduce(
-        //   (previousValue, currentValue) => previousValue + currentValue, initialValue
-        // );
-        // console.log(previousValue);
-        // console.log(lastValue);
-        // console.log(candidateArray);
-
-        // let html = '';
-        // for (let i = 1; i <= cells[selectedCell.length]; i++) {
-        //     html += '<div>'+concatArray[i]+'</div>';
-        //     cells[selectedCell].innerHTML += html;
-        // }
-        
       }
     })
   })

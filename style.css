@@ -338,8 +338,11 @@ nav {
   height: 30px;
 }
 button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
   display: grid;
   height: var(--cell-size);
+  border: none;
   border-radius: var(--border-radius);
   background-color: var(--bg-main);
   color: var(--blue);
