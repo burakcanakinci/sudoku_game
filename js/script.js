@@ -20,7 +20,7 @@ const toggleButton = document.querySelector('#btn__toggle');
 const winScreen = document.querySelector('#win-screen');
 const winBg = document.querySelector('#main');
 const candidates = document.querySelectorAll('.candidate');
-const span = document.querySelectorAll('#span');
+const span = document.querySelector('#span');
 const checkBox = document.querySelector('#checkbox');
 const form = document.querySelector('#form');
 let levelIndex = 0;
@@ -255,21 +255,23 @@ const concatArray = new Set();
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
+  if (cells[selectedCell].classList.contains('main__grid-cell--selected')) {
+    span.value = [...new Set(concatArray)];
+    let newArray = new Set();
+    newArray = concatArray;
+    cells[selectedCell].span = [...new Set(newArray)];
+    console.log(newArray);
+    console.log(cells[selectedCell].span);
+    console.log(span.value);
+  }
   // let theSpan = cells[selectedCell].span;
-  span[selectedCell].innerHTML = [...new Set(concatArray)];
-  console.log(span[selectedCell]);
-
-
-  
+  // span[selectedCell].innerHTML = [...new Set(concatArray)];
+  // console.log(span[selectedCell]);
+  // cells[selectedCell].innerHTML = span[selectedCell].innerHTML;
   // let eachCandidate = candidates[selectedCell];
   // eachCandidate.innerHTML = [...new Set(concatArray)];
-  // console.log(eachCandidate.innerHTML);
-  // if (cells[selectedCell].innerHTML.trim() == "") {
-  //   concatArray.clear();
-  //   cells[selectedCell].innerHTML = [...new Set(concatArray)];
-  // } else {
-  // }
 });
+
 
 const candidateEvent = () => {
   numberInputs.forEach((e, index) => {
