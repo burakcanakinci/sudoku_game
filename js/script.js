@@ -19,9 +19,10 @@ const continueButton = document.querySelector('#btn__continue');
 const toggleButton = document.querySelector('#btn__toggle');
 const winScreen = document.querySelector('#win-screen');
 const winBg = document.querySelector('#main');
-const candidates = document.querySelector('#candidate');
+const candidates = document.querySelectorAll('.candidate');
+const span = document.querySelectorAll('#span');
 const checkBox = document.querySelector('#checkbox');
-const numberDiv = document.querySelectorAll('.numbers')
+const form = document.querySelector('#form');
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex];
 let timer = null;
@@ -225,7 +226,7 @@ const showResult = () => {
 const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
-      event.preventDefault();
+      // event.preventDefault();
       if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && !checkBox.checked) {
         cells[selectedCell].classList.remove('candidate');
         cells[selectedCell].innerHTML = index + 1;
@@ -248,15 +249,34 @@ const initNumberInputEvent = () => {
     })
   })    
 }
+
 const concatArray = new Set();
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  // let theSpan = cells[selectedCell].span;
+  span[selectedCell].innerHTML = [...new Set(concatArray)];
+  console.log(span[selectedCell]);
+
+
+  
+  // let eachCandidate = candidates[selectedCell];
+  // eachCandidate.innerHTML = [...new Set(concatArray)];
+  // console.log(eachCandidate.innerHTML);
+  // if (cells[selectedCell].innerHTML.trim() == "") {
+  //   concatArray.clear();
+  //   cells[selectedCell].innerHTML = [...new Set(concatArray)];
+  // } else {
+  // }
+});
+
 const candidateEvent = () => {
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
       if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked) {
         cells[selectedCell].classList.add('candidate');
-        // - select cell
         const selectCell = cells[selectedCell];
-        // - select a value from the pad
         const padValue = index + 1;
         //     - get candidate values container of selected cell
         
@@ -272,13 +292,11 @@ const candidateEvent = () => {
         }
         //     - assign values back to selected cell candidate values container
         
-        console.log(concatArray);
-        console.log(selectCell);
+        // console.log(span);
         
-        cells[selectedCell].setAttribute('data-array', index + 1);
-
-        let finalArray = concatArray;
-        selectCell.innerHTML = [...new Set(finalArray)];
+        // let finalArray = concatArray;
+        // selectCell.innerHTML = [...new Set(concatArray)];
+        
       }
     })
   })
