@@ -8,3 +8,14 @@
     - assign values back to selected cell candidate values container
   -- if candidate move is not selected
     - assign value to cell
+
+--------------------------------------------------------------
+
+    - select a cell,
+    - then click a number in the pad
+    - then get the stored values from the span that is in the cell
+    - parse that to a set
+    - check if set has the value you pressed
+    - if it has it set.delete(value)
+    - if it doesn't set.add(value)
+    - assign set values as string back to the span

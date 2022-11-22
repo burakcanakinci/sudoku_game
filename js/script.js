@@ -259,10 +259,11 @@ form.addEventListener('submit', (e) => {
     span.value = [...new Set(concatArray)];
     let newArray = new Set();
     newArray = concatArray;
-    cells[selectedCell].span = [...new Set(newArray)];
-    console.log(newArray);
-    console.log(cells[selectedCell].span);
-    console.log(span.value);
+    cells[selectedCell].innerHTML = span.value;
+
+    // console.log(newArray);
+    // console.log(cells[selectedCell].span);
+    // console.log(span.value);
   }
   // let theSpan = cells[selectedCell].span;
   // span[selectedCell].innerHTML = [...new Set(concatArray)];
@@ -270,6 +271,8 @@ form.addEventListener('submit', (e) => {
   // cells[selectedCell].innerHTML = span[selectedCell].innerHTML;
   // let eachCandidate = candidates[selectedCell];
   // eachCandidate.innerHTML = [...new Set(concatArray)];
+
+
 });
 
 
@@ -278,21 +281,24 @@ const candidateEvent = () => {
     e.addEventListener('click', () => {
       if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked) {
         cells[selectedCell].classList.add('candidate');
+        //   - select a cell,
         const selectCell = cells[selectedCell];
+        //   - then click a number in the pad
         const padValue = index + 1;
-        //     - get candidate values container of selected cell
-        
-        //     - get candidate values (if any), assign candidate
-        // values to a data structure that can easily toggle values
-        // (add / remove on repeated)
+        //   - then get the stored values from the span that is in the cell
 
-        //     - process candidate values ( add / remove )
+        //   - parse that to a set
+        
+        //   - check if set has the value you pressed
         if (concatArray.has(padValue)) {
+        //   - if it has it set.delete(value)
           concatArray.delete(padValue);
         } else {
+        //   - if it doesn't set.add(value)
           concatArray.add(padValue);
+        //   - assign set values as string back to the span
+
         }
-        //     - assign values back to selected cell candidate values container
         
         // console.log(span);
         
