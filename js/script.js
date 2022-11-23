@@ -19,10 +19,11 @@ const continueButton = document.querySelector('#btn__continue');
 const toggleButton = document.querySelector('#btn__toggle');
 const winScreen = document.querySelector('#win-screen');
 const winBg = document.querySelector('#main');
-const candidates = document.querySelectorAll('.candidate');
-const span = document.querySelector('#span');
+const candidates = document.querySelector('#span');
 const checkBox = document.querySelector('#checkbox');
 const form = document.querySelector('#form');
+const sudokuGrid = document.querySelectorAll('.main__sudoku-grid');
+const selected = document.querySelectorAll('.main__grid-cell--selected')
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex];
 let timer = null;
@@ -227,7 +228,7 @@ const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
       // event.preventDefault();
-      if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && !checkBox.checked) {
+      if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked == false) {
         cells[selectedCell].classList.remove('candidate');
         cells[selectedCell].innerHTML = index + 1;
         cells[selectedCell].setAttribute('data-value', index + 1);
@@ -250,21 +251,70 @@ const initNumberInputEvent = () => {
   })    
 }
 
-const concatArray = new Set();
+const candidateEvent = () => {
+  const concatArray = new Set(this.padValue);
+  numberInputs.forEach((e, index) => {
+    e.addEventListener('click', () => {
+      if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked == true) {
+        cells[selectedCell].classList.add('candidate');
+        const selectCell = cells[selectedCell];
+        const padValue = index + 1;
+        if (concatArray.has(padValue)) {
+          concatArray.delete(padValue);
+        } else {
+          concatArray.add(padValue);
+        }
+        
+        selectCell.innerHTML = [...concatArray].sort((a, b) => a - b);
+      }
+    })
+  })
+}
 
-form.addEventListener('submit', (e) => {
+// const candidateEvent = (candidateContainer, index) => {
+//   if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked == true) {
+//     candidates[selectedCell].classList.add('candidate');
+//     const selectCell = cells[selectedCell];
+//     const padValue = index + 1;
+
+//     if (concatArray.has(padValue)) {
+//       concatArray.delete(padValue);
+//     } else {
+//       concatArray.add(padValue);
+//     }
+    
+//     selectCell.innerHTML = [...concatArray].sort((a, b) => a - b);
+//   }
+// }
+
+// const candidateEvent = (cells, value) => {
+//   const selectCell = cells[selectedCell];
+//   const values = selectCell.textContent.split(",").filter((x) => x);
+//   const candidates = new Set(values);
+//   if (candidates.has(value)) {
+//     candidates.delete(value);
+//   } else {
+//     candidates.add(value);
+//   }
+//   selectCell.innerText = [...candidates].sort((a, b) => a - b);
+// }
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
-
-  if (cells[selectedCell].classList.contains('main__grid-cell--selected')) {
-    span.value = [...new Set(concatArray)];
-    let newArray = new Set();
-    newArray = concatArray;
-    cells[selectedCell].innerHTML = span.value;
-
-    // console.log(newArray);
-    // console.log(cells[selectedCell].span);
-    // console.log(span.value);
+  if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked == true) {
+    cells[selectedCell].classList.add('candidate');
+    const selectCell = cells[selectedCell];
+    const padValue = e + 1;
+    if (concatArray.has(padValue)) {
+      concatArray.delete(padValue);
+    } else {
+      concatArray.add(padValue);
+    }
+    selectCell.innerHTML = [...concatArray].sort((a, b) => a - b);
   }
+
+});
+
   // let theSpan = cells[selectedCell].span;
   // span[selectedCell].innerHTML = [...new Set(concatArray)];
   // console.log(span[selectedCell]);
@@ -273,42 +323,6 @@ form.addEventListener('submit', (e) => {
   // eachCandidate.innerHTML = [...new Set(concatArray)];
 
 
-});
-
-
-const candidateEvent = () => {
-  numberInputs.forEach((e, index) => {
-    e.addEventListener('click', () => {
-      if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked) {
-        cells[selectedCell].classList.add('candidate');
-        //   - select a cell,
-        const selectCell = cells[selectedCell];
-        //   - then click a number in the pad
-        const padValue = index + 1;
-        //   - then get the stored values from the span that is in the cell
-
-        //   - parse that to a set
-        
-        //   - check if set has the value you pressed
-        if (concatArray.has(padValue)) {
-        //   - if it has it set.delete(value)
-          concatArray.delete(padValue);
-        } else {
-        //   - if it doesn't set.add(value)
-          concatArray.add(padValue);
-        //   - assign set values as string back to the span
-
-        }
-        
-        // console.log(span);
-        
-        // let finalArray = concatArray;
-        // selectCell.innerHTML = [...new Set(concatArray)];
-        
-      }
-    })
-  })
-}
 
 //==================================================================
 const initCellsEvent = () => {
