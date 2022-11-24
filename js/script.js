@@ -224,6 +224,13 @@ const showResult = () => {
   }, 6000);
 }
 //==================================================================
+// const sudokuGame = () => {
+//   sudokuGrid.addEventListener('click', (e) => {
+//     sudokuGrid.selected.forEach(el => el.classList.remove('main__grid-cell--selected'));
+//     e.target.classList.toggle('main__grid-cell--selected');
+//   })
+// }
+
 const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {
     e.addEventListener('click', () => {
@@ -251,41 +258,65 @@ const initNumberInputEvent = () => {
   })    
 }
 
-const candidateEvent = () => {
-  const concatArray = new Set(this.padValue);
-  numberInputs.forEach((e, index) => {
-    e.addEventListener('click', () => {
-      if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked == true) {
-        cells[selectedCell].classList.add('candidate');
-        const selectCell = cells[selectedCell];
-        const padValue = index + 1;
-        if (concatArray.has(padValue)) {
-          concatArray.delete(padValue);
-        } else {
-          concatArray.add(padValue);
-        }
-        
-        selectCell.innerHTML = [...concatArray].sort((a, b) => a - b);
-      }
-    })
-  })
+// const candidateEvent = () => {
+//   const concatArray = new Set(this.padValue);
+//   numberInputs.forEach((e, index) => {
+//     e.addEventListener('click', () => {
+//       if (checkBox.checked == true) {
+//         cells[selectedCell].classList.add('candidate');
+//         const selectCell = cells[selectedCell];
+//         const padValue = index + 1;
+//         if (concatArray.has(padValue)) {
+//           concatArray.delete(padValue);
+//         } else {
+//           concatArray.add(padValue);
+//         }
+//         selectCell.innerHTML = [...concatArray].sort((a, b) => a - b);
+//       }
+//     })
+//   })
+// }
+
+const candidateEvent = (candidateContainer, value) => {
+  const values = candidateContainer.innerHTML.split(",").filter((x) => x);
+  const candidateValues = new Set(values);
+  if (candidateValues.has(value)) {
+    candidateValues.delete(value);
+  } else {
+    candidateValues.add(value);
+  }
+  candidateContainer.innerHTML = [...candidateValues].sort((a, b) => a - b);
 }
 
-// const candidateEvent = (candidateContainer, index) => {
-//   if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked == true) {
-//     candidates[selectedCell].classList.add('candidate');
-//     const selectCell = cells[selectedCell];
-//     const padValue = index + 1;
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const selectCell = cells[selectedCell];
+  const value = e.submitter.value;
+  if (checkBox.checked == true) {
+    selectCell.classList.add('candidate')
+    candidateEvent(selectCell, value)
+  } else {
+    selectCell.innerHTML = value;
+  }
+});
 
+// form.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   if (checkBox.checked == true) {
+//     cells[selectedCell].classList.add('candidate');
+//     const selectCell = cells[selectedCell];
+//     const padValue = e + 1;
 //     if (concatArray.has(padValue)) {
 //       concatArray.delete(padValue);
 //     } else {
 //       concatArray.add(padValue);
 //     }
-    
 //     selectCell.innerHTML = [...concatArray].sort((a, b) => a - b);
 //   }
-// }
+
+// });
+
+
 
 // const candidateEvent = (cells, value) => {
 //   const selectCell = cells[selectedCell];
@@ -299,21 +330,7 @@ const candidateEvent = () => {
 //   selectCell.innerText = [...candidates].sort((a, b) => a - b);
 // }
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (!cells[selectedCell].classList.contains('main__grid-cell--filled') && checkBox.checked == true) {
-    cells[selectedCell].classList.add('candidate');
-    const selectCell = cells[selectedCell];
-    const padValue = e + 1;
-    if (concatArray.has(padValue)) {
-      concatArray.delete(padValue);
-    } else {
-      concatArray.add(padValue);
-    }
-    selectCell.innerHTML = [...concatArray].sort((a, b) => a - b);
-  }
 
-});
 
   // let theSpan = cells[selectedCell].span;
   // span[selectedCell].innerHTML = [...new Set(concatArray)];
@@ -463,6 +480,7 @@ const init = () => {
   initGameGrid();
   initCellsEvent();
   initNumberInputEvent();
+  // sudokuGame();
   candidateEvent();
   if (getPlayerName()) {
     nameInput.value = getPlayerName();
