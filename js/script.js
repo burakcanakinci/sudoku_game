@@ -470,6 +470,7 @@ deleteButton.addEventListener('click', () => {
 const init = () => {
   const game = getGameInfo();
   continueButton.style.display = game ? 'grid':'none';
+  // showResult();
   initGameGrid();
   initCellsEvent();
   initNumberInputEvent();
