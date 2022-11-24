@@ -277,13 +277,6 @@ nav {
   cursor: pointer;
   transition: .2s;
 }
-/* .number__toggle input:checked + label {
-  border: 1px solid var(--blue);
-  background-color: black;
-} */
-.number__toggle:hover {
-  background-color: var(--number-hover);
-}
 .main__pause-screen {
   display: none;
   position: absolute;
