@@ -270,7 +270,8 @@ nav {
   display: grid;
   height: var(--cell-size);
   border-radius: var(--border-radius);
-  background-color: var(--bg-main);
+  /* background-color: var(--bg-main); */
+  background-color: white;
   color: var(--blue);
   place-items: center;
   font-size: var(--font-size-s);
@@ -377,3 +378,11 @@ button {
 .switch input:checked + label::before {
   left: calc(100% - 1.85rem);
 }
+#span {
+  position: absolute;
+  color: var(--black);
+  font-size: .50em;
+  letter-spacing: .5px;
+  margin-left: 15px;
+  margin-top: 35px;
+  }
