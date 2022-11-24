@@ -194,7 +194,6 @@ const checkError = (value) => {
 }
 const removeError = () => {
   cells.forEach(e => e.classList.remove('main__grid-cell--error'));
-  concatArray.clear();
 }
 const saveGameInfo = () => {
   let game = {
@@ -224,12 +223,6 @@ const showResult = () => {
   }, 6000);
 }
 //==================================================================
-// const sudokuGame = () => {
-//   sudokuGrid.addEventListener('click', (e) => {
-//     sudokuGrid.selected.forEach(el => el.classList.remove('main__grid-cell--selected'));
-//     e.target.classList.toggle('main__grid-cell--selected');
-//   })
-// }
 
 const initNumberInputEvent = () => {
   numberInputs.forEach((e, index) => {
@@ -480,7 +473,6 @@ const init = () => {
   initGameGrid();
   initCellsEvent();
   initNumberInputEvent();
-  // sudokuGame();
   candidateEvent();
   if (getPlayerName()) {
     nameInput.value = getPlayerName();
