@@ -255,6 +255,7 @@ const initNumberInputEvent = (valueContainer, value) => {
   } else {
     valueContainer.innerHTML = value;
     valueContainer.setAttribute("data-value", value);
+    removeError();
     checkError(value);
   }
   let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
