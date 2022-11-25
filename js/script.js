@@ -159,7 +159,7 @@ const resetBg = () => {
 };
 const checkError = (value) => {
   const addError = (cell) => {
-    if (parseInt(cell.getAttribute("data-value")) === value) {
+    if (parseInt(cell.getAttribute("data-value")) == value) {
       cell.classList.add("main__grid-cell--error");
     }
   };
@@ -227,32 +227,7 @@ const showResult = () => {
 };
 //==================================================================
 
-// const initNumberInputEvent = () => {
-//   numberInputs.forEach((e, index) => {
-//     e.addEventListener("click", () => {
-//       // event.preventDefault();
-//       if (!checkBox.checked) {
-//         cells[selectedCell].classList.remove("candidate");
-//         cells[selectedCell].innerHTML = index + 1;
-//         cells[selectedCell].setAttribute("data-value", index + 1);
-//         // add to answer
-//         let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-//         let col = selectedCell % CONSTANT.GRID_SIZE;
-//         suAnswer[row][col] = index + 1;
-//         // save game
-//         saveGameInfo();
-//         // ---------
-//         removeError();
-//         checkError(index + 1);
-//         // check game win
-//         if (isGameWin()) {
-//           removeGameInfo();
-//           showResult();
-//         }
-//       }
-//     });
-//   });
-// };
+
 
 // const candidateEvent = () => {
 //   const concatArray = new Set(this.padValue);
@@ -272,6 +247,20 @@ const showResult = () => {
 //     })
 //   })
 // }
+const initNumberInputEvent = (valueContainer, value) => {
+  valueContainer.innerHTML = value;
+  cells[selectedCell].setAttribute("data-value", value);
+  let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+  let col = selectedCell % CONSTANT.GRID_SIZE;
+  suAnswer[row][col] = value;
+  saveGameInfo();
+  removeError();
+  checkError(value);
+  if (isGameWin()) {
+    removeGameInfo();
+    showResult();
+  }
+}
 
 const candidateEvent = (candidateContainer, value) => {
   const values = candidateContainer.innerHTML.split(",").filter((x) => x);
@@ -292,18 +281,7 @@ form.addEventListener("submit", (e) => {
   if (checkBox.checked) {
     candidateEvent(selectCandidate, value);
   } else {
-    selectCell.innerHTML = value;
-    selectCell.setAttribute("data-value", value);
-    let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-    let col = selectedCell % CONSTANT.GRID_SIZE;
-    suAnswer[row][col] = value;
-    saveGameInfo();
-    removeError();
-    checkError(value);
-    if (isGameWin()) {
-      removeGameInfo();
-      showResult();
-    }
+    initNumberInputEvent(selectCell, value);
   }
 });
 
@@ -511,8 +489,8 @@ const init = () => {
   // showResult();
   initGameGrid();
   initCellsEvent();
-  initCandidatesEvent();
-  // initNumberInputEvent();
+  // initCandidatesEvent();
+  initNumberInputEvent();
   candidateEvent();
   if (getPlayerName()) {
     nameInput.value = getPlayerName();
