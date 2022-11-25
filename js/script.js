@@ -19,7 +19,7 @@ const continueButton = document.querySelector("#btn__continue");
 const toggleButton = document.querySelector("#btn__toggle");
 const winScreen = document.querySelector("#win-screen");
 const winBg = document.querySelector("#main");
-const candidates = document.querySelector("#span");
+const candidates = document.getElementById("span");
 const checkBox = document.querySelector("#checkbox");
 const form = document.querySelector("#form");
 const sudokuGrid = document.querySelectorAll(".main__sudoku-grid");
@@ -227,32 +227,32 @@ const showResult = () => {
 };
 //==================================================================
 
-const initNumberInputEvent = () => {
-  numberInputs.forEach((e, index) => {
-    e.addEventListener("click", () => {
-      // event.preventDefault();
-      if (!checkBox.checked) {
-        cells[selectedCell].classList.remove("candidate");
-        cells[selectedCell].innerHTML = index + 1;
-        cells[selectedCell].setAttribute("data-value", index + 1);
-        // add to answer
-        let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-        let col = selectedCell % CONSTANT.GRID_SIZE;
-        suAnswer[row][col] = index + 1;
-        // save game
-        saveGameInfo();
-        // ---------
-        removeError();
-        checkError(index + 1);
-        // check game win
-        if (isGameWin()) {
-          removeGameInfo();
-          showResult();
-        }
-      }
-    });
-  });
-};
+// const initNumberInputEvent = () => {
+//   numberInputs.forEach((e, index) => {
+//     e.addEventListener("click", () => {
+//       // event.preventDefault();
+//       if (!checkBox.checked) {
+//         cells[selectedCell].classList.remove("candidate");
+//         cells[selectedCell].innerHTML = index + 1;
+//         cells[selectedCell].setAttribute("data-value", index + 1);
+//         // add to answer
+//         let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+//         let col = selectedCell % CONSTANT.GRID_SIZE;
+//         suAnswer[row][col] = index + 1;
+//         // save game
+//         saveGameInfo();
+//         // ---------
+//         removeError();
+//         checkError(index + 1);
+//         // check game win
+//         if (isGameWin()) {
+//           removeGameInfo();
+//           showResult();
+//         }
+//       }
+//     });
+//   });
+// };
 
 // const candidateEvent = () => {
 //   const concatArray = new Set(this.padValue);
@@ -287,14 +287,23 @@ const candidateEvent = (candidateContainer, value) => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const selectCell = cells[selectedCell];
+  const selectCandidate = selectCell.previousElementSibling;
   const value = e.submitter.value;
   if (checkBox.checked) {
-    selectCell.classList.add("candidate");
-    candidateEvent(selectCell, value);
+    candidateEvent(selectCandidate, value);
   } else {
-    selectCell.classList.remove("candidate");
-    // selectCell.innerHTML = selectCell.innerHTML + "\n" + value;
     selectCell.innerHTML = value;
+    selectCell.setAttribute("data-value", value);
+    let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+    let col = selectedCell % CONSTANT.GRID_SIZE;
+    suAnswer[row][col] = value;
+    saveGameInfo();
+    removeError();
+    checkError(value);
+    if (isGameWin()) {
+      removeGameInfo();
+      showResult();
+    }
   }
 });
 
@@ -348,6 +357,35 @@ const initCellsEvent = () => {
     });
   });
 };
+
+// const initCandidatesEvent = () => {
+//   candidates.addEventListener("click", (e) => {
+//     if (!e.classList.contains("main__grid-cell--filled")) {
+//       candidates.querySelectorAll('.main__grid-cell--selected').forEach((el) => el.classList.remove('main__grid-cell--selected'));
+//       e.target.classList.toggle("main__grid-cell--selected");
+//     }
+//   });
+// }
+
+
+
+// const initCandidatesEvent = () => {
+//   // candidates.forEach((e, index) => {
+//   //   e.addEventListener("click", () => {
+//   //     if (e.classList.contains("candidate")) {
+//   //       candidates.forEach((e) => e.classList.remove("candidate"));
+//   //       selectedCell = index;
+//   //       e.classList.add("candidate");
+//   //     }
+//   //   });
+//   // });
+//   sudokuGrid.addEventListener('click', (e) => {
+//     sudokuGrid.querySelectorAll('.candidate').forEach(el => el.classList.remove('candidate'));
+//     e.target.classList.toggle('candidate');
+//   });
+// };
+  
+
 // add button event
 levelButton.addEventListener("click", (e) => {
   levelIndex = levelIndex + 1 > CONSTANT.LEVEL.length - 1 ? 0 : levelIndex + 1;
@@ -394,6 +432,7 @@ newGameButton.addEventListener("click", () => {
 deleteButton.addEventListener("click", () => {
   cells[selectedCell].innerHTML = "";
   cells[selectedCell].setAttribute("data-value", 0);
+  cells[selectedCell].previousElementSibling.innerHTML = "";
   let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
   let col = selectedCell % CONSTANT.GRID_SIZE;
   suAnswer[row][col] = 0;
@@ -472,7 +511,8 @@ const init = () => {
   // showResult();
   initGameGrid();
   initCellsEvent();
-  initNumberInputEvent();
+  initCandidatesEvent();
+  // initNumberInputEvent();
   candidateEvent();
   if (getPlayerName()) {
     nameInput.value = getPlayerName();

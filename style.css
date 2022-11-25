@@ -318,7 +318,7 @@ nav {
 .win-screen--active {
   display: flex !important;
 }
-.candidate {
+/* .candidate {
   height: var(--cell-size);
   width: var(--cell-size);
   color: var(--black);
@@ -326,7 +326,7 @@ nav {
   place-items: center;
   font-size: .50em;
   letter-spacing: .5px;
-}
+} */
 #checkbox {
   display: none;
 }
@@ -383,6 +383,8 @@ button {
   color: var(--black);
   font-size: .50em;
   letter-spacing: .5px;
-  margin-left: 15px;
+  margin-left: 3px;
   margin-top: 35px;
+  width: 49px;
+  word-wrap: break-word;
   }
