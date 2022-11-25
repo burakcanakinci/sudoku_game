@@ -251,16 +251,16 @@ const initNumberInputEvent = (valueContainer, value) => {
   if (valueContainer.innerHTML === value) {
     valueContainer.innerHTML = "";
     valueContainer.setAttribute("data-value", 0);
+    removeError();
   } else {
     valueContainer.innerHTML = value;
     valueContainer.setAttribute("data-value", value);
+    checkError(value);
   }
   let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
   let col = selectedCell % CONSTANT.GRID_SIZE;
   suAnswer[row][col] = value;
   saveGameInfo();
-  removeError();
-  checkError(value);
   if (isGameWin()) {
     removeGameInfo();
     showResult();
