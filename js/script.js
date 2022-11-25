@@ -248,8 +248,13 @@ const showResult = () => {
 //   })
 // }
 const initNumberInputEvent = (valueContainer, value) => {
-  valueContainer.innerHTML = value;
-  cells[selectedCell].setAttribute("data-value", value);
+  if (valueContainer.innerHTML === value) {
+    valueContainer.innerHTML = "";
+    valueContainer.setAttribute("data-value", 0);
+  } else {
+    valueContainer.innerHTML = value;
+    valueContainer.setAttribute("data-value", value);
+  }
   let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
   let col = selectedCell % CONSTANT.GRID_SIZE;
   suAnswer[row][col] = value;
