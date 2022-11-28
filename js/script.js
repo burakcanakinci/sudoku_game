@@ -19,11 +19,12 @@ const continueButton = document.querySelector("#btn__continue");
 const toggleButton = document.querySelector("#btn__toggle");
 const winScreen = document.querySelector("#win-screen");
 const winBg = document.querySelector("#main");
-const candidates = document.getElementById("span");
+const candidates = document.querySelectorAll(".candidates");
 const checkBox = document.querySelector("#checkbox");
 const form = document.querySelector("#form");
-const sudokuGrid = document.querySelectorAll(".main__sudoku-grid");
-const selected = document.querySelectorAll(".main__grid-cell--selected");
+const sudokuGrid = document.querySelector(".main__sudoku-grid");
+const valueDiv = document.querySelector(".main__value-cell");
+// const valueCell = document.querySelector(".main__grid-cell");
 let levelIndex = 0;
 let level = CONSTANT.LEVEL[levelIndex];
 let timer = null;
@@ -247,6 +248,7 @@ const showResult = () => {
 //     })
 //   })
 // }
+
 const initNumberInputEvent = (valueContainer, value) => {
   if (valueContainer.innerHTML === value) {
     valueContainer.innerHTML = "";
@@ -258,8 +260,8 @@ const initNumberInputEvent = (valueContainer, value) => {
     removeError();
     checkError(value);
   }
-  let row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
-  let col = selectedCell % CONSTANT.GRID_SIZE;
+  const row = Math.floor(selectedCell / CONSTANT.GRID_SIZE);
+  const col = selectedCell % CONSTANT.GRID_SIZE;
   suAnswer[row][col] = value;
   saveGameInfo();
   if (isGameWin()) {
@@ -281,16 +283,22 @@ const candidateEvent = (candidateContainer, value) => {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const selectCell = cells[selectedCell];
-  const selectCandidate = selectCell.previousElementSibling;
+  const theSelectedCell = sudokuGrid.querySelector('.selected')
   const value = e.submitter.value;
   if (checkBox.checked) {
-    candidateEvent(selectCandidate, value);
+    const cellCandidate = theSelectedCell.querySelector(".candidates")
+    candidateEvent(cellCandidate, value);
   } else {
-    initNumberInputEvent(selectCell, value);
+    const cellValue = theSelectedCell.querySelector(".main__grid-cell");
+    initNumberInputEvent(cellValue, value);
   }
 });
-
+// const initCandidateEvent = () => {
+//   sudokuGrid.addEventListener("click", (e) => {
+//     sudokuGrid.querySelectorAll(".selected").forEach((e) => e.classList.remove("selected"));
+//     e.target.classList.toggle('selected')
+//   });
+// };
 // form.addEventListener("submit", (e) => {
 //   e.preventDefault();
 //   if (checkBox.checked == true) {
@@ -328,19 +336,37 @@ form.addEventListener("submit", (e) => {
 
 //==================================================================
 const initCellsEvent = () => {
+  // const candidate = sudokuGrid.querySelector(".candidates")
   cells.forEach((e, index) => {
     e.addEventListener("click", () => {
       if (!e.classList.contains("main__grid-cell--filled")) {
         cells.forEach((e) => e.classList.remove("main__grid-cell--selected"));
+        sudokuGrid.querySelectorAll('.selected').forEach((e) => e.classList.remove("selected"));
         selectedCell = index;
         e.classList.remove("main__grid-cell--error");
         e.classList.add("main__grid-cell--selected");
+        e.parentNode.classList.add("selected");
         resetBg();
         hoverBg(index);
       }
     });
   });
 };
+
+
+
+// const initCandidateEvent = () => {
+//   candidates.forEach((e, index) => {
+//     e.addEventListener("click", () => {
+//       if (cells.classList.contains("main__grid-cell--selected")) {
+//         candidates.forEach((e) => e.classList.remove("candidates"));
+//         selectedCell = index;
+//         e.classList.remove("main__grid-cell--error");
+//         e.classList.add("candidates");
+//       }     
+//     });
+//   });
+// }
 
 // const initCandidatesEvent = () => {
 //   candidates.addEventListener("click", (e) => {
@@ -494,8 +520,8 @@ const init = () => {
   continueButton.style.display = game ? "grid" : "none";
   // showResult();
   initGameGrid();
+  // initCandidateEvent();
   initCellsEvent();
-  // initCandidatesEvent();
   initNumberInputEvent();
   candidateEvent();
   if (getPlayerName()) {

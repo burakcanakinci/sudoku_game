@@ -378,7 +378,7 @@ button {
 .switch input:checked + label::before {
   left: calc(100% - 1.85rem);
 }
-#span {
+.candidates {
   position: absolute;
   color: var(--black);
   font-size: .50em;
@@ -387,4 +387,4 @@ button {
   margin-top: 35px;
   width: 49px;
   word-wrap: break-word;
-  }
+}
