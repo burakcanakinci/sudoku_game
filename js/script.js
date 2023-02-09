@@ -20,7 +20,7 @@ const toggleButton = document.querySelector("#btn__toggle");
 const winScreen = document.querySelector("#win-screen");
 const winBg = document.querySelector("#main");
 const candidates = document.querySelectorAll(".candidates");
-const checkBox = document.querySelector("#checkbox");
+const checkbox = document.querySelector("#checkbox");
 const form = document.querySelector("#form");
 const sudokuGrid = document.querySelector(".main__sudoku-grid");
 const valueDiv = document.querySelector(".main__value-cell");
@@ -285,7 +285,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   const theSelectedCell = sudokuGrid.querySelector('.selected')
   const value = e.submitter.value;
-  if (checkBox.checked) {
+  if (checkbox.checked) {
     const cellCandidate = theSelectedCell.querySelector(".candidates")
     candidateEvent(cellCandidate, value);
   } else {
@@ -352,9 +352,6 @@ const initCellsEvent = () => {
     });
   });
 };
-
-
-
 // const initCandidateEvent = () => {
 //   candidates.forEach((e, index) => {
 //     e.addEventListener("click", () => {
@@ -517,7 +514,7 @@ deleteButton.addEventListener("click", () => {
 // ----------------
 const init = () => {
   const game = getGameInfo();
-  continueButton.style.display = game ? "grid" : "none";
+  continueButton.style.display = game ? "none" : "none";
   // showResult();
   initGameGrid();
   // initCandidateEvent();
